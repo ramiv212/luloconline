@@ -1,13 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap');
+
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.App {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-family: 'Dosis', sans-serif;
+}
+
+#products-window {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  align-content: flex-start;
+  gap: 4rem;
+  flex-wrap: wrap;
+  padding-top: 3rem;
+  /* background-color: blue; */
+}
+
+.product-card {
+  border-style: none !important;
+  overflow: hidden;
+  width: 200px;
+}
+
+.product-title {
+  font-size: 19px !important;
+}
+
+.product-title:hover {
+  transition: .1s;
+  text-decoration: underline;
+}
+
+.product-card-button {
+  background-color: rgb(64,124,81) !important;
+  border-style: none !important;
+  position: absolute;
+  top: 188px;
+  border-radius: 0 !important;
+  width: inherit;
+}
+
+#navigation-container {
+  width: 100%;
+  height: auto;
+  border-style: solid;
+  border-color: rgb(64,124,81);
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+  padding-top: 5px;
+
+}
+
+#navigation {
+  background-color: transparent !important;
+}
+
+#topbar {
+  background-color: rgb(64,124,81);
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+#sidebar {
+  width: 20%;
+  padding: 10px;
+  /* background-color: red; */
+}
+
+.new-box {
+  position: absolute;
+  width: 50px;
+  text-align: center;
+  background-color: rgb(64,124,81);
+  color: white;
+}
+
+.sale-box {
+  position: absolute;
+  left: auto;
+  right: 0;
+  width: 50px;
+  text-align: center;
+  background-color: red;
+  color: white;
 }

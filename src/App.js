@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import './index.css';
+import { PrismicRichText, usePrismicDocumentByUID, usePrismicDocumentsByType } from '@prismicio/react';
+import Topbar from './components/Topbar';
+import Navigation from './components/Navigation';
+import Sidebar from './components/Sidebar';
+import Products from './components/Products';
+const logo = require('./images/LuloC_logo_webp.webp')
+
 
 function App() {
+
+
+  const [document] = usePrismicDocumentByUID('homepage', 'homepage')
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <div>{ document && (<PrismicRichText field={document.data.title} />) }</div> */}
+      
+      <Topbar />
+
+      <img src={logo}  width="200px"/>
+
+      <div id='navigation-container'>
+        <Navigation id={'navigation'} />
+      </div>  
+
+      <div style={{display:'flex'}}>
+        <Sidebar />
+        <Products />
+      </div>
+
     </div>
   );
 }
