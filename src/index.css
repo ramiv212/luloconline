@@ -38,11 +38,19 @@ code {
 
 .product-title {
   font-size: 19px !important;
+  padding: none;
+  margin: none;
 }
 
 .product-title:hover {
   transition: .1s;
   text-decoration: underline;
+
+}
+
+.product-prices {
+  padding: 0;
+  margin: 0;
 }
 
 .product-card-button {
@@ -83,9 +91,14 @@ code {
 }
 
 #sidebar {
-  width: 20%;
   padding: 10px;
-  /* background-color: red; */
+  display: flex;
+  flex-direction: column;    
+  gap: 0px;
+  justify-content: top;
+  width: 25%;
+  margin-left: 50px;
+  margin-right: 25px;
 }
 
 .new-box {
@@ -104,4 +117,66 @@ code {
   text-align: center;
   background-color: red;
   color: white;
+}
+
+.sidebar-category {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+.css-checkbox { 
+  position: absolute; 
+  overflow: hidden; 
+  clip: rect(0 0 0 0); 
+  height: 1px; 
+  width: 1px; 
+  margin: -1px; 
+  padding: 0; 
+  border: 0;
+}
+                
+.css-checkbox + label { 
+  position: relative; 
+  font-size: 14px; 
+  cursor: pointer; 
+  display: inline-flex; 
+  align-items: center; 
+  height: 20px; 
+  color: rgb(0, 0, 0); 
+}
+
+.css-checkbox + label::before { content: " "; 
+  display: inline-block; 
+  vertical-align: middle; 
+  margin-right: 3px; 
+  width: 18px; 
+  height: 18px; 
+  background-color: white; 
+  border-width: 1px; 
+  border-style: solid; 
+  border-color: rgb(204, 204, 204); 
+  border-radius: 0px; 
+  box-shadow: rgba(42, 42, 42, 0) -1px 0px 5px 0px; 
+}
+
+.css-checkbox:checked + label::after { 
+  content: " "; 
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjNDA3YzUxIiBkPSJNNTEyIDI1NkM1MTIgMzk3LjQgMzk3LjQgNTEyIDI1NiA1MTJDMTE0LjYgNTEyIDAgMzk3LjQgMCAyNTZDMCAxMTQuNiAxMTQuNiAwIDI1NiAwQzM5Ny40IDAgNTEyIDExNC42IDUxMiAyNTZ6Ii8+PC9zdmc+"); 
+  background-repeat: no-repeat; 
+  background-size: 12px 12px; 
+  background-position: center center; 
+  position: absolute; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  margin-left: 0px; 
+  left: -1px; 
+  top: 0px; 
+  text-align: center; 
+  background-color: transparent; 
+  font-size: 10px; 
+  height: 20px; 
+  width: 20px;
+  transition: 1s;
 }

@@ -26,7 +26,7 @@ function Product( {data,uuid} ) {
 
         <Card.Body style={{height:'100px'}}>
             <Card.Title className='product-title'>{data.name[0].text}</Card.Title>
-            <Card.Text><span>
+            <Card.Text className='product-prices'><span>
 
                 {data['original-price'] ? <>$<span style={{textDecoration: 'line-through'}}>{data['original-price']}</span>  | </> : ""}
 
