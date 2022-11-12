@@ -34,6 +34,11 @@ code {
   border-style: none !important;
   overflow: hidden;
   width: 200px;
+  border-radius: 0 !important;
+}
+
+.card-img-top {
+  border-radius: 0 !important;
 }
 
 .product-title {
@@ -107,6 +112,7 @@ code {
   text-align: center;
   background-color: rgb(64,124,81);
   color: white;
+  border-radius: 0 !important;
 }
 
 .sale-box {

@@ -11,7 +11,7 @@ const logo = require('./images/LuloC_logo_webp.webp')
 
 // TODOS
 // Out of stock. Need QTY of items? Subtract qty when item is sold?
-// Use tags to filter
+// remove onSale bool, add sale tag only if sale price exists
 
 
 function App() {
