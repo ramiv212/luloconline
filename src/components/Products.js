@@ -1,15 +1,26 @@
-import React from 'react'
+import { React,useContext } from 'react'
 import '../index.css';
 import Product from './Product';
 import { usePrismicDocumentsByType} from '@prismicio/react';
-
+import * as prismic from '@prismicio/client'
+import { ProductFilterContext } from '../ProductFilterContext'
 
 function Products() {
 
-const [products, { state, error }] = usePrismicDocumentsByType('product');
+
+    const {productFilter, setProductFilter} = useContext(ProductFilterContext)
+
+    const [products, { state, error }] = usePrismicDocumentsByType('product',{
+        predicates: [
+            prismic.predicate.at('document.tags', [...productFilter])
+        ]
+    });
+
+
+    console.log(productFilter)
 
   return (
-    <div style={{display:'flex', flexDirection:'column'}}>
+    <div style={{display:'flex', flexDirection:'column', width:'100%'}}>
         <div style={{width: '75%'}}>
             {products && <span style={{fontWeight:'700'}}>All Items ( {products.results.length} )</span>}
             <span style={{float: 'right',fontWeight:'700'}}>Sort By:</span>

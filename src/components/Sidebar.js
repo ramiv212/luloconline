@@ -16,16 +16,19 @@ function Sidebar() {
   }
 
 
-  function chekboxFunction(checkboxID) {
+  function chekboxFunction(checkboxID,filter) {
+    let lowerCaseID = checkboxID.toLowerCase()
+    let newFilter = [...filter]
     // if the item is found in the array
-    if (productFilter.includes(checkboxID)) {
+    if (newFilter.includes(lowerCaseID)) {
         // remove it
-        removeFromArray(checkboxID,productFilter)
+        removeFromArray(lowerCaseID,newFilter)
+        return newFilter
     // if item is not found in array add it to the array
     } else {
-        productFilter.push(checkboxID)
+        newFilter.push(lowerCaseID)
+        return newFilter
     }
-    console.log(productFilter)
   }
   
 
@@ -40,7 +43,7 @@ function Sidebar() {
                     className="css-checkbox" 
                     id={document.data.categories[0][category]}
                     onChange={(e) => {
-                        chekboxFunction(e.target.id)                  
+                        setProductFilter(chekboxFunction(e.target.id,productFilter))
                     }}
                     >
                     </input>&nbsp;
