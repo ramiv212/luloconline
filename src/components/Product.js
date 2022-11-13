@@ -1,4 +1,4 @@
-import { React,useState } from 'react'
+import { React,useState } from 'react';
 import '../index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Button from 'react-bootstrap/Button';
@@ -9,8 +9,6 @@ import { PrismicRichText } from '@prismicio/react';
 function Product( {data,uuid} ) {
 
     const [toggleCollapse, setToggleCollapse] = useState(false)
-
-    console.log(data['sale-price'])
 
   return (
     <Card style={{width: '14rem'}} className={'product-card'} 
@@ -27,7 +25,7 @@ function Product( {data,uuid} ) {
         {data['sale-price'] ? <div className='sale-box'>Sale!</div> : ""}
 
         <Card.Body style={{height:'100px'}}>
-            <Card.Title className='product-title'>{data.name[0].text}</Card.Title>
+            <Card.Title className='product-title' style={{fontWeight: "400"}}>{data.name[0].text}</Card.Title>
             <Card.Text className='product-prices'><span>
 
                 {data['original-price'] && data['sale-price']  ? <> <span style={{textDecoration: 'line-through'}}>$ {data['original-price']}</span> | </> : 

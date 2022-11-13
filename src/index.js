@@ -7,11 +7,21 @@ import reportWebVitals from './reportWebVitals';
 import { PrismicProvider } from '@prismicio/react'
 import { client } from './prismic'
 
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  BrowserRouter,
+} from "react-router-dom";
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <PrismicProvider client={client}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </PrismicProvider>
   </React.StrictMode>
 );

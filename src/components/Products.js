@@ -4,6 +4,7 @@ import Product from './Product';
 import { usePrismicDocumentsByType} from '@prismicio/react';
 import * as prismic from '@prismicio/client'
 import { ProductFilterContext } from '../ProductFilterContext'
+import Sidebar from './Sidebar';
 
 function Products() {
 
@@ -17,9 +18,9 @@ function Products() {
     });
 
 
-    console.log(productFilter)
-
   return (
+    <>
+    <Sidebar />
     <div style={{display:'flex', flexDirection:'column', width:'100%'}}>
         <div style={{width: '75%'}}>
             {products && <span style={{fontWeight:'700'}}>All Items ( {products.results.length} )</span>}
@@ -32,6 +33,7 @@ function Products() {
 
         </div>
     </div>
+    </>
   )
 }
 
