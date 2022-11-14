@@ -4,8 +4,10 @@ import { Routes,Route } from 'react-router-dom';
 import { usePrismicDocumentByUID } from '@prismicio/react';
 import Topbar from './components/Topbar';
 import Navigation from './components/Navigation';
+import Home from './components/Home'
 import Products from './components/Products';
 import { ProductFilterContext } from './ProductFilterContext'
+import ErrorPage from './components/ErrorPage';
 const logo = require('./images/LuloC_logo_webp.webp')
 
 
@@ -35,7 +37,10 @@ function App() {
         <div style={{display:'flex', width:'100%'}}>
        <ProductFilterContext.Provider value={{ productFilter,setProductFilter }}>
         <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/home' element={<Home />} />
           <Route path='/products' element={<Products />} />
+          <Route path="*" element={<ErrorPage />} /> {/* TODO fix this later */}
         </Routes>
        </ProductFilterContext.Provider>      
 
