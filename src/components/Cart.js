@@ -1,8 +1,13 @@
-import React from 'react'
+import { React,useEffect } from 'react'
 import CartItem from './CartItem'
 import { Offcanvas,Button } from 'react-bootstrap'
 
 function Cart({appOverlayState,setAppOverlayState,shoppingCartState}) {
+
+    useEffect(() => {
+        console.log(shoppingCartState)
+    }, [shoppingCartState])
+    
 
   return (
     <>
@@ -40,8 +45,8 @@ function Cart({appOverlayState,setAppOverlayState,shoppingCartState}) {
                         height:'100%',
                         width:'100%'}}>
 
-                {shoppingCartState && shoppingCartState.forEach((product) => {
-                    return <CartItem id={product} />                    
+                {shoppingCartState && shoppingCartState.map((product) => {
+                    return <CartItem product={product} />                    
                 })}
                 
             </div>}

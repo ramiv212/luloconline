@@ -32,14 +32,12 @@ function Product( {data,id} ) {
                 let newState = [...shoppingCartState]
                 newState[newState.indexOf(item)].qty ++
                 setShoppingCartState(newState)
-                console.log(shoppingCartState)
            } else {
             // if item does not exist, add it to the shopping cart array
                 let newState = [...shoppingCartState,productCartObject]
                 setShoppingCartState(newState)
            }
 
-        //    console.log(shoppingCartState)
         }
 
         function removeFromCart() {
@@ -51,7 +49,6 @@ function Product( {data,id} ) {
                 let newState = [...shoppingCartState]
                 if ( newState[newState.indexOf(item)].qty > 0 ) {newState[newState.indexOf(item)].qty --}
                 setShoppingCartState(newState)
-                console.log(shoppingCartState)
            } else {
             // if item does not exist, add it to the shopping cart array
                 let newState = [...shoppingCartState,productCartObject]
