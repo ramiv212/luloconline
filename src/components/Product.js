@@ -17,8 +17,7 @@ function Product( {data,id} ) {
 
     // shopping cart logic
         function addToCart(id) {
-            const updatedCartSet = new Set([...shoppingCartState,id])
-            setShoppingCartState(Array.from(updatedCartSet))
+            setShoppingCartState([...shoppingCartState,id])
     }
 
 

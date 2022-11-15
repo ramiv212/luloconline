@@ -5,6 +5,7 @@ import Topbar from './components/Topbar';
 import Navigation from './components/Navigation';
 import Home from './components/Home'
 import Products from './components/Products';
+import Cart from './components/Cart';
 import { ProductFilterContext } from './ProductFilterContext'
 import { ShoppingCartContext } from './ShoppingCartContext';
 import ErrorPage from './components/ErrorPage';
@@ -20,10 +21,12 @@ function App() {
 
   const [productFilter, setProductFilter] = useState([])
   const [shoppingCartState, setShoppingCartState] = useState([])
+  const [appOverlayState,setAppOverlayState] = useState(false)
 
   return (
       <div className="App">
-        <ShoppingCartContext.Provider value={{ shoppingCartState,setShoppingCartState }}>
+
+        <ShoppingCartContext.Provider value={{ shoppingCartState,setShoppingCartState,appOverlayState,setAppOverlayState }}>
         <ProductFilterContext.Provider value={{ productFilter,setProductFilter }}>
         {/* <div>{ document && (<PrismicRichText field={document.data.title} />) }</div> */}
         
@@ -33,7 +36,9 @@ function App() {
 
         <div id='navigation-container'>
           <Navigation id={'navigation'} />
-        </div>  
+        </div>
+
+        <Cart appOverlayState={appOverlayState} setAppOverlayState={setAppOverlayState} shoppingCartState={shoppingCartState} />
 
         <div style={{display:'flex', width:'100%'}}>
           <Routes>
