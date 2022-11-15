@@ -9,8 +9,6 @@ function Topbar() {
 
   const { shoppingCartState,setShoppingCartState,appOverlayState,setAppOverlayState } = useContext(ShoppingCartContext)
 
-  console.log(shoppingCartState)
-
   return (
     <div id='topbar'>
 

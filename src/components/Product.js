@@ -5,20 +5,62 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Fade from 'react-bootstrap/Collapse'
 import { ShoppingCartContext } from '../ShoppingCartContext';
-import { PrismicRichText,useAllPrismicDocumentsByType } from '@prismicio/react';
+import { useAllPrismicDocumentsByType } from '@prismicio/react';
 
 
 function Product( {data,id} ) {
 
+    const products = useAllPrismicDocumentsByType('product')
+
     const [toggleCollapse, setToggleCollapse] = useState(false)
 
-    const products = useAllPrismicDocumentsByType('product')
     const { shoppingCartState,setShoppingCartState } = useContext(ShoppingCartContext)
 
-    // shopping cart logic
-        function addToCart(id) {
-            setShoppingCartState([...shoppingCartState,id])
+    const productCartObject = {
+        id: id,
+        qty: 1,
     }
+
+
+    // shopping cart logic
+        function addToCart() {
+            // check if item already exists in shopping cart array
+            let item = shoppingCartState.find(product => product.id === id)
+
+           if (item) {
+            // if item already exists, add one to it's qty
+                let newState = [...shoppingCartState]
+                newState[newState.indexOf(item)].qty ++
+                setShoppingCartState(newState)
+                console.log(shoppingCartState)
+           } else {
+            // if item does not exist, add it to the shopping cart array
+                let newState = [...shoppingCartState,productCartObject]
+                setShoppingCartState(newState)
+           }
+
+        //    console.log(shoppingCartState)
+        }
+
+        function removeFromCart() {
+            // check if item already exists in shopping cart array
+            let item = shoppingCartState.find(product => product.id === id)
+
+           if (item) {
+            // if item already exists, remove one from it's qty
+                let newState = [...shoppingCartState]
+                if ( newState[newState.indexOf(item)].qty > 0 ) {newState[newState.indexOf(item)].qty --}
+                setShoppingCartState(newState)
+                console.log(shoppingCartState)
+           } else {
+            // if item does not exist, add it to the shopping cart array
+                let newState = [...shoppingCartState,productCartObject]
+                setShoppingCartState(newState)
+           }
+
+        //    console.log(shoppingCartState)
+        }
+
 
 
   return (

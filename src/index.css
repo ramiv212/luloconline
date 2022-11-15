@@ -221,3 +221,11 @@ code {
 #cart {
   font-family: 'Dosis', sans-serif !important;
 }
+
+.cart-item {
+  width: 90%;
+  border-style: solid;
+  border-color: rgb(153,164,130,.8);
+  border-width: 1px 0px 1px 0px;
+  margin-top: -1px;
+}
