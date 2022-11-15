@@ -70,15 +70,15 @@ code {
 #navigation-container {
   width: 100%;
   height: auto;
-  /* border-style: solid;
+  border-style: solid;
   border-color: rgb(153,164,130);
   border-top: 0;
   border-left: 0;
-  border-right: 0; */
+  border-right: 0;
   display: flex;
   justify-content: center;
   padding-top: 5px;
-  padding-top: 5px;
+  padding-bottom: 5px;
   z-index: 1000;
   position: -webkit-sticky;
   position: sticky;
@@ -133,7 +133,7 @@ code {
   right: 0;
   width: 50px;
   text-align: center;
-  background-color: red;
+  background-color: #DC4C64;
   color: white;
 }
 
@@ -199,10 +199,21 @@ code {
   transition: 1s;
 }
 
-.homepage-square {
-  /* padding: 5%; */
+.homepage-info-squares {
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  flex-direction: column;
   margin: auto;
-  width: 20%;
-  aspect-ratio: 1 / 1;
-  background-color: rgb(153,164,130);
+}
+
+.cartQty {
+  background-image: radial-gradient(circle, #DC4C64, #DC4C64 66%, transparent 66%);
+  display: inline-block; 
+  position: relative;
+  width: 22px;
+  height: 22px;
+  font-weight: 600;
+  right: 10px;
+  top: 10px;
 }

@@ -17,7 +17,6 @@ function Products() {
         ]
     });
 
-
   return (
     <>
     <Sidebar />
@@ -28,7 +27,7 @@ function Products() {
         </div>
         <div id='products-window'>
             {products && Object.keys(products.results).map((index => {
-                return <Product data={products.results[index].data} uuid={products.results[index].id} key={products.results[index].id}/>
+                return <Product data={products.results[index].data} id={products.results[index].id} key={products.results[index].id}/>
         }))}
 
         </div>

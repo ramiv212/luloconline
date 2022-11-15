@@ -7,8 +7,6 @@ function Home() {
 
 const [document] = usePrismicDocumentByUID('homepage', 'homepage')
 
-    console.log(document && document.data)
-
   return (
   <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
 
@@ -41,33 +39,66 @@ const [document] = usePrismicDocumentByUID('homepage', 'homepage')
         </div>
     </div>
 
-    <div style={{display: 'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',paddingTop:'70px', paddingBottom:'20px'}}>
-      <h3>Shop By Category</h3>
-    </div>
+    <div style={{display: 'flex',
+                flexDirection:'column',
+                alignItems:'center',
+                justifyContent:'center',
+                height: 'calc(100vh)',}}>
 
-    <div style={{width:'100%', display:'flex',alignItems:'center',justifyContent:'center'}}>
-      <div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center',width: '80%'}}>
+      <h3 style={{fontSize:'20px',padding:'30px'}}>Shop By Category</h3>
 
-        <div className='homepage-square' style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-          <div>Card 1</div>
+        <div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center',width: '90%'}}>
+        
+          <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',width:'33%'}}>
+            <div style={{paddingBottom:'10px'}}>{document && document.data.firstsquaretext[0].text}</div>
+            <img src={document && document.data.firstsquareimage.url} style={{width:'95%', aspectRatio:'1 / 1',objectFit:'cover'}} />
+          </div>
+
+          <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',width:'33%'}}>
+            <div style={{paddingBottom:'10px'}}>{document && document.data.secondsquaretext[0].text}</div>
+            <img src={document && document.data.secondsquareimage.url} style={{width:'95%', aspectRatio:'1 / 1',objectFit:'cover'}} />
+          </div>
+
+          <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',width:'33%'}}>
+            <div style={{paddingBottom:'10px'}}>{document && document.data.thirdsquaretext[0].text}</div>
+            <img src={document && document.data.thirdsquareimage.url} style={{width:'95%', aspectRatio:'1 / 1',objectFit:'cover'}} />
+          </div>
+
+          <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',width:'33%'}}>
+            <div style={{paddingBottom:'10px'}}>{document && document.data.fourthsquaretext[0].text}</div>
+            <img src={document && document.data.fourthsquareimage.url} style={{width:'95%', aspectRatio:'1 / 1', objectFit:'cover'}} />
+          </div>
+
         </div>
 
-        <div className='homepage-square' style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-
-          Card 2
+        <div className='bg-light' style={{margin:'70px',width:'89%'}}>
+          <div className='bg-light' style={{width:'100%',display:'flex',flexDirection:'rows',alignItems:'center',justifyContent:'center'}}>
+            <div className='homepage-info-squares'>
+              Box 1
+            </div>
+            <div className='homepage-info-squares'>
+              Box 1
+            </div>
+            <div className='homepage-info-squares'>
+              Box 1
+            </div>
+            <div className='homepage-info-squares'>
+              Box 1
+            </div>
+          </div>
         </div>
 
-        <div className='homepage-square' style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-
-          Card 3
-        </div>
-
-        <div className='homepage-square' style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-
-          Card 4
-        </div>
       </div>
-    </div>
+
+      <div style={{display: 'flex',
+                flexDirection:'column',
+                alignItems:'center',
+                justifyContent:'center',
+                height: 'calc(100vh)',}}>
+        
+        ;aksd
+
+      </div>
 
   </div> 
   )
