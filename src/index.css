@@ -39,6 +39,7 @@ code {
 
 .card-img-top {
   border-radius: 0 !important;
+  cursor: pointer;
 }
 
 .product-title {
@@ -208,7 +209,7 @@ code {
   gap: 15px;
   margin: auto;
   width: 95%;
-  aspect-ratio: 1 / 1;
+  height: 50%;
 }
 
 .cartQty {

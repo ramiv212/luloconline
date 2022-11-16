@@ -80,7 +80,7 @@ const [favorites, { state, error }] = usePrismicDocumentsByType('product',{
 
         </div>
 
-        <div className='bg-light' style={{margin:'70px',width:'89%'}}>
+        <div className='bg-light' style={{margin:'70px',width:'89%',height:'20%'}}>
           <div className='bg-light' style={{width:'100%',display:'flex',flexDirection:'rows',alignItems:'center',justifyContent:'center'}}>
             <div className='homepage-info-squares'>
               Box 1
@@ -100,7 +100,7 @@ const [favorites, { state, error }] = usePrismicDocumentsByType('product',{
       </div>
 
       <div style={{height:'100vh'}}>
-        <h3 style={{fontSize:'20px',padding:'30px',display:'flex',justifyContent:'center'}}>Favorite Products</h3>
+        <h3 style={{fontSize:'20px',padding:'30px',display:'flex',justifyContent:'center',alignItems:'center'}}>Favorite Products</h3>
         <div style={{margin:'70px',width:'89%'}}>
             <div style={{width:'100%',display:'flex',flexDirection:'rows',alignItems:'center',justifyContent:'center'}}>
               

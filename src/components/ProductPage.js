@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 function ProductPage() {
 
     const { id } = useParams('id')
-    const [product, { state, error }] = usePrismicDocumentByID(id);
+    const [product] = usePrismicDocumentByID(id);
 
     product && console.log(product)
 
@@ -15,7 +15,7 @@ function ProductPage() {
 
             {/* product image */}
             <div style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly',width:'50%',height:'85%', margin:'auto'}}>
-                <img src={product && product.data.image.url} />
+                <img src={product && product.data.image.url} alt={product && product.data.name[0].text} />
             </div>
 
             {/* product */}
