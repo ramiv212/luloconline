@@ -219,6 +219,17 @@ code {
   top: 30px;
 }
 
+.cartQtyNav {
+  background-image: radial-gradient(circle, #DC4C64, #DC4C64 66%, transparent 66%);
+  display: inline-block; 
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  font-weight: 600;
+  left: 23px;
+  top: 10px;
+}
+
 #cart {
   font-family: 'Dosis', sans-serif !important;
   overflow-y: scroll !important;
@@ -298,5 +309,44 @@ code {
     display: none;
     transform: scaleY(0);
     opacity: 0;
+  }
+}
+
+
+/* slide up animation for cart buttons */
+.animate-fade-in {
+  animation: animatefadein 0.4s;
+  animation-fill-mode:forwards;
+  animation-iteration-count: 1;
+}
+
+.animate-fade-out {
+  animation: animatefadeout 0.4s;
+  animation-fill-mode:forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes animatefadein {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  to {
+    opacity: 100;
+    transform: scale(100%);
+
+  }
+}
+
+@keyframes animatefadeout {
+  from {
+    opacity: 1;
+    transform: scale(100%);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0);
   }
 }

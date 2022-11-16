@@ -3,14 +3,13 @@ import '../index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Fade from 'react-bootstrap/Collapse'
 import { ShoppingCartContext } from '../ShoppingCartContext';
-import { useAllPrismicDocumentsByType } from '@prismicio/react';
+// import { useAllPrismicDocumentsByType } from '@prismicio/react';
 import { addToCart,returnCartQtyFromID } from '../helperFunctions'
 
 function Product( {data,id} ) {
 
-    const products = useAllPrismicDocumentsByType('product')
+    // const products = useAllPrismicDocumentsByType('product')
 
     const [toggleCollapse, setToggleCollapse] = useState(false)
     const [cartQtyState,setCartQtyState] = useState(null)

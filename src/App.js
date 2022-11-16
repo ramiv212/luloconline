@@ -1,5 +1,5 @@
 import './index.css';
-import { useState,useContext } from 'react'
+import { useState } from 'react'
 import { Routes,Route } from 'react-router-dom';
 import Topbar from './components/Topbar';
 import Navigation from './components/Navigation';
@@ -16,6 +16,16 @@ const logo = require('./images/LuloC_logo_webp.webp')
 // Out of stock. Need QTY of items? Subtract qty when item is sold?
 // remove onSale bool, add sale tag only if sale price exists
 // Make the error page pretty
+// add logo and cart to sticky topbar
+// add animations to loading
+// add fade-in to items
+// add hover animation to items like cart, checkboxes,etc
+// responsive
+// image alts and tooltips for some things?
+// add individual item pages
+// product image cover
+// reviews?
+
 
 function App() {
 

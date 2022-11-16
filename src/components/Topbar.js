@@ -1,13 +1,12 @@
 import { React, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { ShoppingCartContext } from '../ShoppingCartContext';
+import CartIcon from './CartIcon';
 const instagram = require('../images/instagram-png-white.png')
 
 function Topbar() {
 
-  const { shoppingCartState,setShoppingCartState,appOverlayState,setAppOverlayState } = useContext(ShoppingCartContext)
+  const { shoppingCartState,appOverlayState,setAppOverlayState } = useContext(ShoppingCartContext)
 
   return (
     <div id='topbar'>
@@ -22,19 +21,7 @@ function Topbar() {
           <img src={instagram} style={{height:'23px', float:"right"}}/>
 
           {/* Cart Icon */}
-          <span style={{display: 'flex',alignItmes:'center',justifyContent:'left',cursor:'pointer'}} 
-            onClick={() => {
-            (setAppOverlayState(!appOverlayState))
-          }}>
-            <FontAwesomeIcon style={{fontSize:'23px',width:'40px'}} color='white' icon={faCartShopping}></FontAwesomeIcon>
-            {shoppingCartState.length > 0 ?
-            <span className='cartQty'>
-              <span style={{width:'100%',display:'flex', justifyContent:'center',alignItems:'center',paddingBottom:'1px',paddingLeft:'0px'}}>
-              {shoppingCartState.length}
-              </span>
-            </span> : ""}
-          </span>
-
+          <CartIcon shoppingCartState={shoppingCartState} appOverlayState={appOverlayState} setAppOverlayState={setAppOverlayState} navBar={false} />
 
         </div>
     </div>

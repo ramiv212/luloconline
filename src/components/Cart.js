@@ -1,4 +1,4 @@
-import { React,useEffect } from 'react'
+import { React } from 'react'
 import CartItem from './CartItem'
 import { Offcanvas,Button } from 'react-bootstrap'
 import { useAllPrismicDocumentsByIDs } from '@prismicio/react'
@@ -20,7 +20,7 @@ function Cart({appOverlayState,setAppOverlayState,shoppingCartState}) {
           <Offcanvas.Title>Your Cart</Offcanvas.Title>
         </Offcanvas.Header>
         
-        <Offcanvas.Body style={{display:'flex',flexDirection:'column',alignItems:'left',justifyContent:'initial'}}>
+        <Offcanvas.Body style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
             
             {shoppingCartState.length <= 0 ? <div 
                 style={{fontSize:'27px',
@@ -29,7 +29,8 @@ function Cart({appOverlayState,setAppOverlayState,shoppingCartState}) {
                 flexDirection:'column',
                 alignItems:'center',
                 justifyContent:'center',
-                gap:'20px'}}>
+                gap:'20px',
+                margin:'auto'}}>
                     
                 Your Cart Is Empty
 

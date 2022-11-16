@@ -1,11 +1,25 @@
+import { useState,useContext } from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
+import CartIcon from './CartIcon';
+import { ShoppingCartContext } from '../ShoppingCartContext';
 
 function Navigation() {
+
+  const { shoppingCartState,appOverlayState,setAppOverlayState } = useContext(ShoppingCartContext)
+  const [pageScroll, setPageScroll] = useState(0)
+
+  window.addEventListener('scroll', (e) => {
+    if (window.scrollY > 80 ) { setPageScroll(true) }
+    else if ((window.scrollY < 80 )) { setPageScroll(false) }
+  })
+
+
   return (
+    <div style={{width:'100%', display:'flex', justifyContent:'center', alignItems:'center'}}>
     <Navbar expand="lg">
       <Container>
         <Navbar.Brand href="#home"></Navbar.Brand>
@@ -29,6 +43,14 @@ function Navigation() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    
+    <span className={`${
+      pageScroll ? 'animate-fade-in navbar-show' : 'animate-fade-out navbar-hide'
+    }`} style={{right:'2.5%',left:'auto',position:'absolute'}}>
+      <CartIcon shoppingCartState={shoppingCartState} appOverlayState={appOverlayState} setAppOverlayState={setAppOverlayState} navBar={true}/>
+    </span>
+
+    </div>
   );
 }
 
