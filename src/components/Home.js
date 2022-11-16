@@ -1,11 +1,20 @@
-import React from 'react'
-import { usePrismicDocumentByUID } from '@prismicio/react';
-
-
+import { usePrismicDocumentByUID,usePrismicDocumentsByType } from '@prismicio/react';
+import * as prismic from '@prismicio/client'
+import Product from './Product'
 
 function Home() {
 
 const [document] = usePrismicDocumentByUID('homepage', 'homepage')
+
+const [favorites, { state, error }] = usePrismicDocumentsByType('product',{
+  predicates: [
+      prismic.predicate.at('my.product.isfavorite', true)
+  ]
+});
+
+  let firstFourFavorites = null
+  if (favorites) {firstFourFavorites = Object.values(favorites.results).slice(0,4)}
+
 
   return (
   <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
@@ -90,16 +99,22 @@ const [document] = usePrismicDocumentByUID('homepage', 'homepage')
 
       </div>
 
-      <div style={{display: 'flex',
-                flexDirection:'column',
-                alignItems:'center',
-                justifyContent:'center',
-                height: 'calc(100vh)',}}>
-        
-        ;aksd
-
-      </div>
-
+      <div style={{height:'100vh'}}>
+        <h3 style={{fontSize:'20px',padding:'30px',display:'flex',justifyContent:'center'}}>Favorite Products</h3>
+        <div style={{margin:'70px',width:'89%'}}>
+            <div style={{width:'100%',display:'flex',flexDirection:'rows',alignItems:'center',justifyContent:'center'}}>
+              
+              {firstFourFavorites &&
+                firstFourFavorites.map((favoriteProduct) => {
+                  return <div className='homepage-info-squares' key={favoriteProduct.id}>
+                    <Product data={favoriteProduct.data} id={favoriteProduct.id} />
+                  </div>
+                })
+              }
+            
+            </div>
+          </div>
+        </div>
   </div> 
   )
 }

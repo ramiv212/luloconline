@@ -4,8 +4,6 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
 function CartIcon({shoppingCartState,appOverlayState,setAppOverlayState,navBar}) {
 
-    console.log(navBar)
-
   return (
     <span style={{display: 'flex',alignItmes:'center',justifyContent:'left',cursor:'pointer'}} 
             onClick={() => {

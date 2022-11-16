@@ -205,7 +205,10 @@ code {
   justify-content: center; 
   align-items: center;
   flex-direction: column;
+  gap: 15px;
   margin: auto;
+  width: 95%;
+  aspect-ratio: 1 / 1;
 }
 
 .cartQty {

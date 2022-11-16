@@ -9,6 +9,7 @@ import Cart from './components/Cart';
 import { ProductFilterContext } from './ProductFilterContext'
 import { ShoppingCartContext } from './ShoppingCartContext';
 import ErrorPage from './components/ErrorPage';
+import ProductPage from './components/ProductPage';
 const logo = require('./images/LuloC_logo_webp.webp')
 
 
@@ -25,6 +26,7 @@ const logo = require('./images/LuloC_logo_webp.webp')
 // add individual item pages
 // product image cover
 // reviews?
+// homepage customer favorites
 
 
 function App() {
@@ -55,6 +57,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/home' element={<Home />} />
             <Route path='/products' element={<Products />} />
+            <Route path='/products/:id' element={<ProductPage />} />
             <Route path="*" element={<ErrorPage />} /> {/* TODO fix this later */}
           </Routes>
         

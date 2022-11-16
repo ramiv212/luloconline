@@ -4,10 +4,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { ShoppingCartContext } from '../ShoppingCartContext';
-// import { useAllPrismicDocumentsByType } from '@prismicio/react';
 import { addToCart,returnCartQtyFromID } from '../helperFunctions'
 
 function Product( {data,id} ) {
+
+    console.log(id)
 
     // const products = useAllPrismicDocumentsByType('product')
 
