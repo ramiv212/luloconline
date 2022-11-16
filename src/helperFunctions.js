@@ -1,8 +1,11 @@
 
-function returnItemQtyByID(shoppingCartState,itemID) {
-    console.log(shoppingCartState)
-    console.log(itemID)
+export const usFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+  
 
+function returnItemQtyByID(shoppingCartState,itemID) {
     let item = shoppingCartState.find((product) => {
         return product.id === itemID
     })
@@ -60,5 +63,23 @@ export function removeFromCart(id,shoppingCartState,setShoppingCartState) {
         })
         let newState = [...arrayWithoutItemObject]
         setShoppingCartState(newState)
+    }
+}
+
+
+function returnPriceFromProduct(productObject,cartProducts) {
+    let product = cartProducts && cartProducts.find((product) => {
+        return product.id === productObject.id
+    })
+
+    if (product && product.data['sale-price']) return product.data['sale-price'] * productObject.qty
+    if (product && product.data['original-price']) return product.data['original-price'] * productObject.qty
+}
+
+export function returnCartTotal(shoppingCartState,cartProducts) {
+    if (cartProducts) {
+        let sum = shoppingCartState.reduce((previousValue,nextValue) => previousValue + returnPriceFromProduct(nextValue,cartProducts), 0)
+        
+        if (!isNaN(sum)) return sum
     }
 }

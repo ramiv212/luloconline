@@ -1,12 +1,19 @@
 import { React,useEffect } from 'react'
 import CartItem from './CartItem'
 import { Offcanvas,Button } from 'react-bootstrap'
+import { useAllPrismicDocumentsByIDs } from '@prismicio/react'
+import { returnCartTotal,usFormatter } from '../helperFunctions'
 
 function Cart({appOverlayState,setAppOverlayState,shoppingCartState}) {
 
-    useEffect(() => {
-    }, [shoppingCartState])
+    const arrayOfIDs = []
+    shoppingCartState && shoppingCartState.forEach(productObject => {
+        arrayOfIDs.push(productObject.id)
+    });
     
+    const cartProducts =  useAllPrismicDocumentsByIDs(arrayOfIDs)
+
+    // cartProducts && console.log(cartProducts)
 
   return (
     <>
@@ -15,7 +22,7 @@ function Cart({appOverlayState,setAppOverlayState,shoppingCartState}) {
           <Offcanvas.Title>Your Cart</Offcanvas.Title>
         </Offcanvas.Header>
         
-        <Offcanvas.Body style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
+        <Offcanvas.Body style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'initial'}}>
             
             {shoppingCartState.length <= 0 ? <div 
                 style={{fontSize:'27px',
@@ -41,8 +48,9 @@ function Cart({appOverlayState,setAppOverlayState,shoppingCartState}) {
                         flexDirection:'column',
                         alignItems:'center',
                         justifyContent:'initial',
-                        height:'100%',
-                        width:'100%'}}>
+                        height:'60%',
+                        width:'100%',
+                        overflow:'scroll'}}>
 
                 {shoppingCartState && shoppingCartState.map((product) => {
                     return <CartItem product={product} key={product.id} />                    
@@ -50,6 +58,9 @@ function Cart({appOverlayState,setAppOverlayState,shoppingCartState}) {
                 
             </div>}
             
+            <div style={{marginTop:'auto'}}>
+                {returnCartTotal(shoppingCartState,cartProducts[0]) !== 0 ? cartProducts && returnCartTotal(shoppingCartState,cartProducts[0]) && usFormatter.format((returnCartTotal(shoppingCartState,cartProducts[0]))) : ""}
+            </div>
 
         </Offcanvas.Body>
 

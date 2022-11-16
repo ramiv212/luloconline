@@ -7,6 +7,7 @@ import Fade from 'react-bootstrap/Collapse'
 import { ShoppingCartContext } from '../ShoppingCartContext';
 import { useAllPrismicDocumentsByType } from '@prismicio/react';
 import { addToCart } from '../helperFunctions'
+import { Offcanvas } from 'react-bootstrap';
 
 function Product( {data,id} ) {
 
@@ -18,7 +19,10 @@ function Product( {data,id} ) {
 
 
   return (
-    <Card style={{width: '14rem'}} className={'product-card'}>
+    <Card style={{width: '14rem'}} className={'product-card'}
+        onMouseEnter={() => {setToggleCollapse('animate-bottom')}}
+        onMouseLeave={() => {setToggleCollapse('animate-away')}}
+    >
 
         <Card.Img variant="top" src={data.image.url} className="card-image" />
 
@@ -39,13 +43,13 @@ function Product( {data,id} ) {
                 </span>
                 </Card.Text>
         </Card.Body>
-        {/* <Fade in={toggleCollapse}> */}
-            <Button className={`product-card-button`} 
+            <Button className={`product-card-button ${toggleCollapse}`} 
                     style={{bacgroundColor: 'rgb(64,124,81)'}}
                     onClick={()=> {
                         addToCart(id,shoppingCartState,setShoppingCartState)
-                    }}>Add To Cart</Button>
-        {/* </Fade> */}
+                    }}>
+                        Add To Cart
+                </Button>
     </Card>
   )
 }

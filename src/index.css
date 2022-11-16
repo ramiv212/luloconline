@@ -65,6 +65,7 @@ code {
   top: 188px;
   border-radius: 0 !important;
   width: inherit;
+  opacity: 0;
 }
 
 #navigation-container {
@@ -228,4 +229,44 @@ code {
   border-color: rgb(153,164,130,.8);
   border-width: 1px 0px 1px 0px;
   margin-top: -1px;
+}
+
+
+
+/* slide up animation for cart buttons */
+.animate-bottom {
+  animation: animatebottom 0.4s;
+  animation-fill-mode:forwards;
+  animation-iteration-count: 1;
+}
+
+.animate-away {
+  animation: animateaway 0.4s;
+  animation-fill-mode:forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes animatebottom {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scaleY(30px);
+    opacity: 1;
+  }
+}
+
+@keyframes animateaway {
+  from {
+    transform: scaleY(30px);
+    opacity: 1;
+  }
+
+  to {
+    display: none;
+    transform: scaleY(0);
+    opacity: 0;
+  }
 }

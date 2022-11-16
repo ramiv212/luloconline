@@ -21,7 +21,7 @@ function CartItem({product}) {
 
                     {/* minus button */}
                     <FontAwesomeIcon icon={faMinus} 
-                        style={{paddingLeft:'10px',paddingRight:'10px',fontSize:'12px'}}
+                        style={{paddingLeft:'10px',paddingRight:'10px',fontSize:'12px',cursor:'pointer'}}
                         onClick={() => {
                             removeFromCart(product.id,shoppingCartState,setShoppingCartState)
                         }} /> 
@@ -30,7 +30,7 @@ function CartItem({product}) {
 
                     {/* plus button */}
                     <FontAwesomeIcon icon={faPlus} 
-                    style={{paddingLeft:'10px',fontSize:'12px'}} 
+                    style={{paddingLeft:'10px',fontSize:'12px',cursor:'pointer'}} 
                     onClick={() => {
                         addToCart(product.id,shoppingCartState,setShoppingCartState)
                     }}/></div>
