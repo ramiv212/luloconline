@@ -1,4 +1,4 @@
-import { React,useState,useContext } from 'react';
+import { React,useState,useContext,useEffect } from 'react';
 import '../index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Button from 'react-bootstrap/Button';
@@ -6,17 +6,21 @@ import Card from 'react-bootstrap/Card';
 import Fade from 'react-bootstrap/Collapse'
 import { ShoppingCartContext } from '../ShoppingCartContext';
 import { useAllPrismicDocumentsByType } from '@prismicio/react';
-import { addToCart } from '../helperFunctions'
-import { Offcanvas } from 'react-bootstrap';
+import { addToCart,returnCartQtyFromID } from '../helperFunctions'
 
 function Product( {data,id} ) {
 
     const products = useAllPrismicDocumentsByType('product')
 
     const [toggleCollapse, setToggleCollapse] = useState(false)
+    const [cartQtyState,setCartQtyState] = useState(null)
 
     const { shoppingCartState,setShoppingCartState } = useContext(ShoppingCartContext)
-
+    
+    useEffect(() => {
+      shoppingCartState && setCartQtyState(returnCartQtyFromID(shoppingCartState,id))
+    }, [id,shoppingCartState])
+    
 
   return (
     <Card style={{width: '14rem'}} className={'product-card'}
@@ -43,12 +47,12 @@ function Product( {data,id} ) {
                 </span>
                 </Card.Text>
         </Card.Body>
-            <Button className={`product-card-button ${toggleCollapse}`} 
+            <Button className={`product-card-button ${toggleCollapse} ${cartQtyState ? 'bg-danger' : ''}`} 
                     style={{bacgroundColor: 'rgb(64,124,81)'}}
                     onClick={()=> {
                         addToCart(id,shoppingCartState,setShoppingCartState)
                     }}>
-                        Add To Cart
+                        { cartQtyState ? <>Added To Cart (&nbsp;{cartQtyState}&nbsp;)</> : <>Add To Cart</>}
                 </Button>
     </Card>
   )

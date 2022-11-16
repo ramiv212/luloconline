@@ -36,7 +36,7 @@ export function addToCart(id,shoppingCartState,setShoppingCartState) {
 
 }
 
-export function removeFromCart(id,shoppingCartState,setShoppingCartState) {
+export function decrementFromCart(id,shoppingCartState,setShoppingCartState) {
     // this object is to be added to the state if it is not in the state
     const productCartObject = {
         id: id,
@@ -67,6 +67,19 @@ export function removeFromCart(id,shoppingCartState,setShoppingCartState) {
 }
 
 
+export function removeFromCart(id,shoppingCartState,setShoppingCartState) {
+    // check if item already exists in shopping cart array
+    let item = shoppingCartState.find(product => product.id === id)
+
+        // remove from cart
+        let arrayWithoutItemObject = shoppingCartState.filter((product) => {
+            return product.id !== item.id
+        })
+        let newState = [...arrayWithoutItemObject]
+        setShoppingCartState(newState)
+}
+
+
 function returnPriceFromProduct(productObject,cartProducts) {
     let product = cartProducts && cartProducts.find((product) => {
         return product.id === productObject.id
@@ -76,10 +89,46 @@ function returnPriceFromProduct(productObject,cartProducts) {
     if (product && product.data['original-price']) return product.data['original-price'] * productObject.qty
 }
 
+
+function returnFullPriceFromProduct(productObject,cartProducts) {
+    let product = cartProducts && cartProducts.find((product) => {
+        return product.id === productObject.id
+    })
+
+    if (product && product.data['original-price']) return product.data['original-price'] * productObject.qty
+}
+
+
 export function returnCartTotal(shoppingCartState,cartProducts) {
     if (cartProducts) {
         let sum = shoppingCartState.reduce((previousValue,nextValue) => previousValue + returnPriceFromProduct(nextValue,cartProducts), 0)
         
         if (!isNaN(sum)) return sum
     }
+}
+
+
+export function returnFullCartTotal(shoppingCartState,cartProducts) {
+    if (cartProducts) {
+        let sum = shoppingCartState.reduce((previousValue,nextValue) => previousValue + returnFullPriceFromProduct(nextValue,cartProducts), 0)
+        
+        if (!isNaN(sum)) return sum
+    }
+}
+
+
+export function returnCartItemPrice(itemObject,product) {
+    console.log(itemObject)
+    console.log(product)
+    let salePrice = itemObject[1].state === 'loaded' && itemObject[0].data['sale-price'] * product.qty
+    let originalPrice = itemObject[1].state === 'loaded' && itemObject[0].data['original-price'] * product.qty
+    return {salePrice: salePrice, originalPrice: originalPrice}
+}
+
+
+export function returnCartQtyFromID(shoppingCartState,id) {
+    if (!shoppingCartState) return
+    let item = shoppingCartState.find(product => product.id === id)
+    item && console.log(item.qty)
+    if (item) return item.qty
 }

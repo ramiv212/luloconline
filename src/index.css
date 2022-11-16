@@ -221,7 +221,29 @@ code {
 
 #cart {
   font-family: 'Dosis', sans-serif !important;
+  overflow-y: scroll !important;
 }
+
+.cart-items-div::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.cart-items-div::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+
+.cart-items-div::-webkit-scrollbar:horizontal {
+  display: none;
+}
+
+.cart-items-div::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  border: 2px solid white; /* should match background, can't be transparent */
+  background-color: rgb(153,164,130);
+}
+
+
+
 
 .cart-item {
   width: 90%;
@@ -229,9 +251,17 @@ code {
   border-color: rgb(153,164,130,.8);
   border-width: 1px 0px 1px 0px;
   margin-top: -1px;
+  margin-left: -5px;
 }
 
-
+.cart-item-remove{
+  position: relative;
+  display: block;
+  left: 105%;
+  top: 0;
+  color: rgb(128, 128, 128);
+  cursor: pointer;
+}
 
 /* slide up animation for cart buttons */
 .animate-bottom {

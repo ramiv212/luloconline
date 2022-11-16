@@ -29,7 +29,7 @@ function Topbar() {
             <FontAwesomeIcon style={{fontSize:'23px',width:'40px'}} color='white' icon={faCartShopping}></FontAwesomeIcon>
             {shoppingCartState.length > 0 ?
             <span className='cartQty'>
-              <span style={{width:'100%',display:'flex', justifyContent:'center',alignItems:'center',paddingBottom:'1px',paddingLeft:'1px'}}>
+              <span style={{width:'100%',display:'flex', justifyContent:'center',alignItems:'center',paddingBottom:'1px',paddingLeft:'0px'}}>
               {shoppingCartState.length}
               </span>
             </span> : ""}
