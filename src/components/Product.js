@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card';
 import Fade from 'react-bootstrap/Collapse'
 import { ShoppingCartContext } from '../ShoppingCartContext';
 import { useAllPrismicDocumentsByType } from '@prismicio/react';
-
+import { addToCart } from '../helperFunctions'
 
 function Product( {data,id} ) {
 
@@ -15,49 +15,6 @@ function Product( {data,id} ) {
     const [toggleCollapse, setToggleCollapse] = useState(false)
 
     const { shoppingCartState,setShoppingCartState } = useContext(ShoppingCartContext)
-
-    const productCartObject = {
-        id: id,
-        qty: 1,
-    }
-
-
-    // shopping cart logic
-        function addToCart() {
-            // check if item already exists in shopping cart array
-            let item = shoppingCartState.find(product => product.id === id)
-
-           if (item) {
-            // if item already exists, add one to it's qty
-                let newState = [...shoppingCartState]
-                newState[newState.indexOf(item)].qty ++
-                setShoppingCartState(newState)
-           } else {
-            // if item does not exist, add it to the shopping cart array
-                let newState = [...shoppingCartState,productCartObject]
-                setShoppingCartState(newState)
-           }
-
-        }
-
-        function removeFromCart() {
-            // check if item already exists in shopping cart array
-            let item = shoppingCartState.find(product => product.id === id)
-
-           if (item) {
-            // if item already exists, remove one from it's qty
-                let newState = [...shoppingCartState]
-                if ( newState[newState.indexOf(item)].qty > 0 ) {newState[newState.indexOf(item)].qty --}
-                setShoppingCartState(newState)
-           } else {
-            // if item does not exist, add it to the shopping cart array
-                let newState = [...shoppingCartState,productCartObject]
-                setShoppingCartState(newState)
-           }
-
-        //    console.log(shoppingCartState)
-        }
-
 
 
   return (
@@ -86,7 +43,7 @@ function Product( {data,id} ) {
             <Button className={`product-card-button`} 
                     style={{bacgroundColor: 'rgb(64,124,81)'}}
                     onClick={()=> {
-                        addToCart(id)
+                        addToCart(id,shoppingCartState,setShoppingCartState)
                     }}>Add To Cart</Button>
         {/* </Fade> */}
     </Card>

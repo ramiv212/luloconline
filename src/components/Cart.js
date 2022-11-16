@@ -5,7 +5,6 @@ import { Offcanvas,Button } from 'react-bootstrap'
 function Cart({appOverlayState,setAppOverlayState,shoppingCartState}) {
 
     useEffect(() => {
-        console.log(shoppingCartState)
     }, [shoppingCartState])
     
 
@@ -46,7 +45,7 @@ function Cart({appOverlayState,setAppOverlayState,shoppingCartState}) {
                         width:'100%'}}>
 
                 {shoppingCartState && shoppingCartState.map((product) => {
-                    return <CartItem product={product} />                    
+                    return <CartItem product={product} key={product.id} />                    
                 })}
                 
             </div>}
