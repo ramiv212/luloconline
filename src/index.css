@@ -19,6 +19,12 @@ code {
   font-family: 'Dosis', sans-serif;
 }
 
+.home-category-images {
+  width: 95%; 
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
 #products-window {
   width: 90%;
   display: flex;
@@ -31,15 +37,17 @@ code {
 }
 
 .product-card {
-  border-style: none !important;
-  overflow: hidden;
-  width: 200px;
-  border-radius: 0 !important;
+  /* border-style: none !important; */
+  /* overflow: hidden; */
+  /* border-radius: 0 !important; */
+  padding: 0 !important;
+  margin:'20px';
 }
 
 .card-img-top {
   border-radius: 0 !important;
   cursor: pointer;
+  width: inherit;
 }
 
 .product-title {
@@ -62,10 +70,7 @@ code {
 .product-card-button {
   background-color: rgb(153,164,130) !important;
   border-style: none !important;
-  position: absolute;
-  top: 188px;
   border-radius: 0 !important;
-  width: inherit;
   opacity: 0;
 }
 
@@ -354,3 +359,37 @@ code {
     transform: scale(0);
   }
 }
+
+
+#qty-dropdown {
+  width: 100px;
+  height: 40px;
+  border-radius: 0;
+}
+
+#qty-dropdown :focus {
+  border-radius: 0 !important;
+}
+
+#qty-bar {
+  width: 75%;
+}
+
+@media (max-width: 767.98px) { 
+
+  #sidebar {
+    display: none;
+  }
+
+  .product-card {
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  #qty-bar {
+    margin: auto;
+    padding-bottom: 30px;
+  }
+
+ }

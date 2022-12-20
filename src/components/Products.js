@@ -1,15 +1,17 @@
-import { React,useContext } from 'react'
+import { React,useContext, useState } from 'react';
 import '../index.css';
 import Product from './Product';
 import { usePrismicDocumentsByType} from '@prismicio/react';
 import * as prismic from '@prismicio/client'
-import { ProductFilterContext } from '../ProductFilterContext'
+import { ProductFilterContext } from '../ProductFilterContext';
 import Sidebar from './Sidebar';
+import { Container, Row } from 'react-bootstrap';
 
 function Products() {
 
 
     const {productFilter, setProductFilter} = useContext(ProductFilterContext)
+    const [rowCounter, setRowCounter ] = useState(0)
 
     const [products, { state, error }] = usePrismicDocumentsByType('product',{
         predicates: [
@@ -21,17 +23,18 @@ function Products() {
     <>
     <Sidebar />
     <div style={{display:'flex', flexDirection:'column', width:'100%'}}>
-        <div style={{width: '75%'}}>
+        <div id='qty-bar'>
             {products && <span style={{fontWeight:'700'}}>All Items ( {products.results.length} )</span>}
             <span style={{float: 'right',fontWeight:'700'}}>Sort By:</span>
         </div>
-        <div id='products-window'>
-            {products && Object.keys(products.results).map((index => {
-                return <Product data={products.results[index].data} id={products.results[index].id} key={products.results[index].id}/>
-        }))}
-
+            <Container fluid>
+                <Row>
+                {products && Object.keys(products.results).map((index => {
+                    return <Product data={products.results[index].data} id={products.results[index].id} width={275} key={products.results[index].id} />
+            }))}
+                </Row>
+            </Container>
         </div>
-    </div>
     </>
   )
 }
