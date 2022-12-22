@@ -118,8 +118,8 @@ export function returnFullCartTotal(shoppingCartState,cartProducts) {
 
 
 export function returnCartItemPrice(itemObject,product) {
-    console.log(itemObject)
-    console.log(product)
+    // console.log(itemObject)
+    // console.log(product)
     let salePrice = itemObject[1].state === 'loaded' && itemObject[0].data['sale-price'] * product.qty
     let originalPrice = itemObject[1].state === 'loaded' && itemObject[0].data['original-price'] * product.qty
     return {salePrice: salePrice, originalPrice: originalPrice}
@@ -129,6 +129,6 @@ export function returnCartItemPrice(itemObject,product) {
 export function returnCartQtyFromID(shoppingCartState,id) {
     if (!shoppingCartState) return
     let item = shoppingCartState.find(product => product.id === id)
-    item && console.log(item.qty)
+    // item && console.log(item.qty)
     if (item) return item.qty
 }

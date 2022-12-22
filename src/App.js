@@ -1,15 +1,16 @@
 import "./index.css";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import { ProductFilterContext } from "./ProductFilterContext";
+import { ShoppingCartContext } from "./ShoppingCartContext";
 import Topbar from "./components/Topbar";
 import Navigation from "./components/Navigation";
 import Home from "./components/Home";
 import Products from "./components/Products";
 import Cart from "./components/Cart";
-import { ProductFilterContext } from "./ProductFilterContext";
-import { ShoppingCartContext } from "./ShoppingCartContext";
 import ErrorPage from "./components/ErrorPage";
 import ProductPage from "./components/ProductPage";
+import Checkout from "./components/Checkout";
 const logo = require("./images/LuloC_logo_webp.webp");
 
 // TODOS
@@ -26,6 +27,7 @@ const logo = require("./images/LuloC_logo_webp.webp");
 // add sorting?
 // when checkbox was clicked and then all checkboxes are unclicked, nothing shows up
 // add flex wrap to homepage favorite products
+// blank out checkout button when no items
 
 function App() {
   const [productFilter, setProductFilter] = useState([]);
@@ -67,6 +69,13 @@ function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/products" element={<Products />} />
               <Route path="/products/:id" element={<ProductPage />} />
+
+              <Route path="/checkout" element={<Checkout 
+                shoppingCartState={shoppingCartState}
+                appOverlayState={appOverlayState}
+                setAppOverlayState={setAppOverlayState}
+                 />} />
+                 
               <Route path="*" element={<ErrorPage />} />
               {/* TODO fix this later */}
             </Routes>

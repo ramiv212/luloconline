@@ -19,16 +19,18 @@ function Products() {
         ]
     });
 
+
   return (
     <>
     <Sidebar />
     <div style={{display:'flex', flexDirection:'column', width:'100%'}}>
         <div id='qty-bar'>
             {products && <span style={{fontWeight:'700'}}>All Items ( {products.results.length} )</span>}
-            <span style={{float: 'right',fontWeight:'700'}}>Sort By:</span>
+            {/* <span style={{float: 'right',fontWeight:'700'}}>Sort By:</span> */}
         </div>
             <Container fluid>
                 <Row>
+                    {console.log(products && products.results)}
                 {products && Object.keys(products.results).map((index => {
                     return <Product data={products.results[index].data} id={products.results[index].id} width={275} key={products.results[index].id} />
             }))}

@@ -120,7 +120,7 @@ code {
   flex-direction: column;    
   gap: 0px;
   justify-content: top;
-  width: 25%;
+  width: 18%;
   margin-left: 50px;
   margin-right: 25px;
 }
@@ -389,6 +389,18 @@ code {
 
   #qty-bar {
     margin: auto;
+    padding-bottom: 30px;
+  }
+
+ }
+
+ @media (min-width: 767.98px) { 
+
+  .product-card {
+    margin: 30px;
+  }
+
+  #qty-bar {
     padding-bottom: 30px;
   }
 

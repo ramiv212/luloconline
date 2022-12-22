@@ -1,20 +1,26 @@
 import { React } from "react";
+import { useNavigate } from "react-router-dom"
 import CartItem from "./CartItem";
 import { Offcanvas, Button } from "react-bootstrap";
 import { useAllPrismicDocumentsByIDs } from "@prismicio/react";
 import {
   returnCartTotal,
-  returnFullCartTotal,
+  returnFullCartTotal, 
   usFormatter,
 } from "../helperFunctions";
 
 function Cart({ appOverlayState, setAppOverlayState, shoppingCartState }) {
+
+  const navigate = useNavigate()
+
+  // get IDs of all items in the shopping cart and put them in an array
   const arrayOfIDs = [];
   shoppingCartState &&
     shoppingCartState.forEach((productObject) => {
       arrayOfIDs.push(productObject.id);
     });
 
+  // get all the items from prismic using the array of IDs
   const cartProducts = useAllPrismicDocumentsByIDs(arrayOfIDs);
 
   return (
@@ -131,6 +137,10 @@ function Cart({ appOverlayState, setAppOverlayState, shoppingCartState }) {
         <button
           className="btn btn-dark w-100"
           style={{ borderRadius: "0", fontSize: "23px", height: "11%" }}
+          onClick={() => {
+            console.log(shoppingCartState)
+            navigate(`/checkout`)
+          }}
         >
           CHECK OUT
         </button>
