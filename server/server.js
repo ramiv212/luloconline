@@ -18,7 +18,8 @@ app.use(express.json());
 app.use(cors())
 
 const corsOptions = {
-    origin: process.env.REACT_APP_FRONTEND_URL,
+    origin: [process.env.REACT_APP_FRONTEND_URL,'http://127.0.0.1'],
+    credentials:true,
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
     methods: ['GET', 'PUT', 'POST']
   }
@@ -91,7 +92,7 @@ const init = async () => {
                     product_data: {
                         name: productsObjectForStripe[item.id].name,
                     },
-                    unit_amount: productsObjectForStripe[item.id].price,
+                    unit_amount: Math.trunc(productsObjectForStripe[item.id].price,)
                 },
                 quantity: item.qty,
 

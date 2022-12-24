@@ -21,7 +21,7 @@ function Home() {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+    <div style={{ display: "flex", flexDirection: "column", width: "100%" }} id='category-page'>
       <div
         style={{
           backgroundImage: `url("${
@@ -46,8 +46,8 @@ function Home() {
         >
           <div id="homepage-banner-text">
             
-            <div style={{ width: "50%" }}>
-              <h1>Professional Skin Care Products +</h1>
+            <div style={{ width: "50%" }} id="header-text">
+              <h1 id="header-text">Professional Skin Care Products +</h1>
               Good health is not just the absence of disease or illness, it is a
               state of complete physical, mental and social well-being.
             </div>
@@ -56,15 +56,15 @@ function Home() {
       </div>
 
       <div
+        id='category-section'
         style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          height: "calc(100vh)",
         }}
       >
-        <h3 style={{ fontSize: "20px", padding: "30px" }}>Shop By Category</h3>
+        <h3 style={{ fontSize: "20px", padding: "30px", paddingTop:'90px' }}>Shop By Category</h3>
         
           <Container fluid style={{width:'90%'}}>
             <Row>
@@ -126,7 +126,7 @@ function Home() {
 
         <div
           className="bg-light"
-          style={{ margin: "70px", width: "100%", height: "20%" }}
+          style={{ margin: "70px", width: "100%", height: "150px",marginTop:'120px' }}
         >
           <Container style={{height:'100%'}}>
             <Row style={{height:'100%'}}>
@@ -155,11 +155,13 @@ function Home() {
         </div>
       </div>
 
-      <div style={{ height: "100vh" }}>
+      <div style={{
+        paddingBottom:'100px',
+        paddingTop:'30px'
+      }}>
         <h3
           style={{
             fontSize: "20px",
-            padding: "30px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -168,12 +170,12 @@ function Home() {
           Favorite Products
         </h3>
 
-        <Container fluid>
+        <Container>
             <Row>
                 {firstFourFavorites &&
                   firstFourFavorites.map((favoriteProduct) => {
                     return (
-                      <Col xs={12} sm={6} md={3}
+                      <Col xs={12} sm={6} md='auto'
                         key={favoriteProduct.id}
                       >
                         <Product

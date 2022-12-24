@@ -12,6 +12,7 @@ import ErrorPage from "./components/ErrorPage";
 import ProductPage from "./components/ProductPage";
 import Checkout from "./components/Checkout";
 import Success from "./components/Success";
+import Footer from "./components/Footer"
 const logo = require("./images/LuloC_logo_webp.webp");
 
 // TODOS
@@ -23,8 +24,6 @@ const logo = require("./images/LuloC_logo_webp.webp");
 // image alts and tooltips for some things?
 // reviews?
 // logo link to homepage
-// add flex wrap to homepage favorite products
-// blank out checkout button when no items
 // make a payment completion page
 // creams and oils filters don't work
 // make a filter for sale items
@@ -81,6 +80,7 @@ function App() {
               {/* TODO fix this later */}
             </Routes>
           </div>
+          <Footer />
         </ProductFilterContext.Provider>
       </ShoppingCartContext.Provider>
     </div>
