@@ -7,7 +7,9 @@ function Footer() {
         width:'100%',
         display:'flex',
         justifyContent:'center',
-        alignItems:'center'}}>
+        alignItems:'center'}}
+        
+        id="footer">
       Footer
     </div>
   )

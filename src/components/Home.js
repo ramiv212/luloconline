@@ -2,6 +2,7 @@ import {
   usePrismicDocumentByUID,
   usePrismicDocumentsByType,
 } from "@prismicio/react";
+import { useNavigate } from "react-router-dom";
 import * as prismic from "@prismicio/client";
 import Product from "./Product";
 import { Container,Row,Col } from "react-bootstrap";
@@ -9,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBookOpen,faBagShopping,faHeart } from '@fortawesome/free-solid-svg-icons'
 
 function Home() {
+
   const [document] = usePrismicDocumentByUID("homepage", "homepage");
 
   const [favorites] = usePrismicDocumentsByType("product", {
@@ -18,6 +20,13 @@ function Home() {
   let firstFourFavorites = null;
   if (favorites) {
     firstFourFavorites = Object.values(favorites.results).slice(0, 4);
+  }
+
+  // this hook is for clicking on 
+  let navigate = useNavigate(); 
+  const routeChange = (route) =>{ 
+    let path = route;
+    navigate(path);
   }
 
   return (
@@ -130,7 +139,7 @@ function Home() {
         >
           <Container style={{height:'100%'}}>
             <Row style={{height:'100%'}}>
-              <Col className="homepage-info-squares">
+              <Col className="homepage-info-squares" onClick={() => {routeChange('/products')}}>
                 <FontAwesomeIcon icon={faBagShopping} style={{width:'40px', height:'40px'}} />
                 <div>Shop</div>
               </Col>

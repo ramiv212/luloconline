@@ -13,6 +13,7 @@ import ProductPage from "./components/ProductPage";
 import Checkout from "./components/Checkout";
 import Success from "./components/Success";
 import Footer from "./components/Footer"
+import Learn from "./components/Learn";
 const logo = require("./images/LuloC_logo_webp.webp");
 
 // TODOS
@@ -68,6 +69,7 @@ function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/products" element={<Products />} />
               <Route path="/products/:id" element={<ProductPage />} />
+              <Route path="/learn" element={<Learn />} />
 
               {/* <Route path="/checkout" element={<Checkout 
                 shoppingCartState={shoppingCartState}
