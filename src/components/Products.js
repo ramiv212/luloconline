@@ -1,4 +1,4 @@
-import { React,useContext, useState } from 'react';
+import { React,useContext, useState, useEffect } from 'react';
 import '../index.css';
 import Product from './Product';
 import { usePrismicDocumentsByType} from '@prismicio/react';
@@ -18,6 +18,12 @@ function Products() {
             prismic.predicate.at('document.tags', [...productFilter])
         ]
     });
+
+    // reset product filter when returning to page
+    useEffect(() => {
+        setProductFilter([])
+    }, [])
+    
 
 
   return (

@@ -11,23 +11,23 @@ import Cart from "./components/Cart";
 import ErrorPage from "./components/ErrorPage";
 import ProductPage from "./components/ProductPage";
 import Checkout from "./components/Checkout";
+import Success from "./components/Success";
 const logo = require("./images/LuloC_logo_webp.webp");
 
 // TODOS
 // Make the error page pretty
-// add logo and cart to sticky topbar
 // add animations to loading
 // add fade-in to items
 // add hover animation to items like cart, checkboxes,etc
 // responsive
 // image alts and tooltips for some things?
-// product image cover
 // reviews?
 // logo link to homepage
-// add sorting?
-// when checkbox was clicked and then all checkboxes are unclicked, nothing shows up
 // add flex wrap to homepage favorite products
 // blank out checkout button when no items
+// make a payment completion page
+// creams and oils filters don't work
+// make a filter for sale items
 
 function App() {
   const [productFilter, setProductFilter] = useState([]);
@@ -70,12 +70,13 @@ function App() {
               <Route path="/products" element={<Products />} />
               <Route path="/products/:id" element={<ProductPage />} />
 
-              <Route path="/checkout" element={<Checkout 
+              {/* <Route path="/checkout" element={<Checkout 
                 shoppingCartState={shoppingCartState}
                 appOverlayState={appOverlayState}
                 setAppOverlayState={setAppOverlayState}
-                 />} />
-                 
+                 />} /> */}
+
+              <Route path="/success" element={<Success />} />
               <Route path="*" element={<ErrorPage />} />
               {/* TODO fix this later */}
             </Routes>

@@ -207,14 +207,15 @@ code {
 }
 
 .homepage-info-squares {
+  font-family: 'Dosis', sans-serif !important;
+  font-weight: 300;
+  font-size: 24px;
   display: flex; 
   justify-content: center; 
   align-items: center;
   flex-direction: column;
-  gap: 15px;
-  margin: auto;
-  width: 95%;
-  height: 50%;
+  height: 100%;
+  color: rgb(130,130,130);
 }
 
 .cartQty {
@@ -392,6 +393,20 @@ code {
     padding-bottom: 30px;
   }
 
+  #homepage-banner-text {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 150%;
+}
+
+  #topbar-text {
+    font-size: 70%;
+  }
+
  }
 
  @media (min-width: 767.98px) { 
@@ -403,5 +418,15 @@ code {
   #qty-bar {
     padding-bottom: 30px;
   }
+
+  #homepage-banner-text {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 150%;
+}
 
  }

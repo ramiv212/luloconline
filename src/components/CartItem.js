@@ -5,7 +5,7 @@ import { faMinus,faPlus,faXmark } from '@fortawesome/free-solid-svg-icons'
 import { addToCart,decrementFromCart,removeFromCart,returnCartItemPrice,usFormatter } from '../helperFunctions'
 import { ShoppingCartContext } from '../ShoppingCartContext'
 
-function CartItem({product}) {
+function CartItem({ product,removeQtyControls }) {
 
      const { shoppingCartState,setShoppingCartState } = useContext(ShoppingCartContext)
     
@@ -14,7 +14,7 @@ function CartItem({product}) {
   return (
     <div className='cart-item' style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'row',paddingBottom:'15px', paddingTop:'15px'}}>
 
-        <FontAwesomeIcon onClick={() => {removeFromCart(product.id,shoppingCartState,setShoppingCartState)}} icon={faXmark} className="cart-item-remove" />
+        { removeQtyControls ? "" : <FontAwesomeIcon onClick={() => {removeFromCart(product.id,shoppingCartState,setShoppingCartState)}} icon={faXmark} className="cart-item-remove" />}
 
         <div style={{display:'flex',flexDirection:'row',justifyContent:'left', alignItems:'center', gap:'10px'}}>
             <img src={itemObject[0] && itemObject[0].data.image.url} style={{width:'25%'}}></img>
@@ -24,20 +24,23 @@ function CartItem({product}) {
                         <div style={{userSelect:'none'}}>Qty: 
 
                             {/* minus button */}
+                            {removeQtyControls ? " " :
                             <FontAwesomeIcon icon={faMinus} 
                                 style={{paddingLeft:'10px',paddingRight:'10px',fontSize:'12px',cursor:'pointer',userSelect:'none'}}
                                 onClick={() => {
                                     decrementFromCart(product.id,shoppingCartState,setShoppingCartState)
-                                }} /> 
+                                }} />}
 
                                 <span style={{userSelect:'none'}}>{product.qty}</span>
 
                             {/* plus button */}
+                            {removeQtyControls ? " " :
                             <FontAwesomeIcon icon={faPlus} 
                             style={{paddingLeft:'10px',fontSize:'12px',cursor:'pointer'}} 
                             onClick={() => {
                                 addToCart(product.id,shoppingCartState,setShoppingCartState)
-                            }}/></div>
+                            }}/>}
+                            </div>
 
                             <div style={{fontWeight:'600'}}>
                                 { returnCartItemPrice(itemObject,product).salePrice ? 

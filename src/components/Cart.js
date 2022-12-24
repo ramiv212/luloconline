@@ -1,5 +1,4 @@
-import { React } from "react";
-import { useNavigate } from "react-router-dom"
+import { React ,useState,useEffect} from "react";
 import CartItem from "./CartItem";
 import { Offcanvas, Button } from "react-bootstrap";
 import { useAllPrismicDocumentsByIDs } from "@prismicio/react";
@@ -8,10 +7,21 @@ import {
   returnFullCartTotal, 
   usFormatter,
 } from "../helperFunctions";
+import { loadStripe } from "@stripe/stripe-js";
+
 
 function Cart({ appOverlayState, setAppOverlayState, shoppingCartState }) {
 
-  const navigate = useNavigate()
+  const [chekoutButtonDisabled, setCheckoutButtonDisabled] = useState(false)
+
+  useEffect(() => {
+    if (shoppingCartState.length > 0) {
+      setCheckoutButtonDisabled(false) 
+    } else {
+      setCheckoutButtonDisabled(true)
+    }
+  }, [shoppingCartState])
+  
 
   // get IDs of all items in the shopping cart and put them in an array
   const arrayOfIDs = [];
@@ -22,6 +32,28 @@ function Cart({ appOverlayState, setAppOverlayState, shoppingCartState }) {
 
   // get all the items from prismic using the array of IDs
   const cartProducts = useAllPrismicDocumentsByIDs(arrayOfIDs);
+  
+
+  function createCheckoutSession(shoppingCartState) {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/create-checkout-session`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        items: shoppingCartState,
+      })
+     }
+    ).then( res => {
+      if (res.ok) return res.json()
+      return res.json().then(json => Promise.reject(json))
+    }).then(({ url }) => {
+      window.location = url
+    }).catch(e => {
+      console.error(e.error)
+    })
+  }
+
 
   return (
     <>
@@ -132,14 +164,15 @@ function Cart({ appOverlayState, setAppOverlayState, shoppingCartState }) {
                   )
                 : ""}
             </div>
+
           </div>
         </Offcanvas.Body>
         <button
+          disabled={chekoutButtonDisabled}
           className="btn btn-dark w-100"
           style={{ borderRadius: "0", fontSize: "23px", height: "11%" }}
           onClick={() => {
-            console.log(shoppingCartState)
-            navigate(`/checkout`)
+            createCheckoutSession(shoppingCartState)
           }}
         >
           CHECK OUT

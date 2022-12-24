@@ -12,8 +12,9 @@ function Topbar() {
     <div id='topbar'>
 
         {/* Announce bar */}
-        <div style={{display: 'flex', alignItems:'center',justifyContent:'center',width:'100%',marginLeft:'20%'}}>
-                <div>Free shipping on orders over $150 &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;Save up to 20%, 30%, 40% + <Link style={{color:'black'}} >see details</Link> </div>
+        <div style={{display: 'flex', alignItems:'center',justifyContent:'center',flexDirection:'row',flexWrap:'wrap',width:'100%',marginLeft:'20%'}} id="topbar-text">
+                <div>Free shipping on orders over $150 &nbsp;&nbsp;&nbsp;</div>
+                <div>| &nbsp;&nbsp;&nbsp;Save up to 20%, 30%, 40% + <Link style={{color:'black'}} >see details</Link> </div>
         </div>
         
         {/* IG Logo */}

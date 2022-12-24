@@ -4,6 +4,9 @@ import {
 } from "@prismicio/react";
 import * as prismic from "@prismicio/client";
 import Product from "./Product";
+import { Container,Row,Col } from "react-bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBookOpen,faBagShopping,faHeart } from '@fortawesome/free-solid-svg-icons'
 
 function Home() {
   const [document] = usePrismicDocumentByUID("homepage", "homepage");
@@ -41,17 +44,8 @@ function Home() {
             position: "relative",
           }}
         >
-          <div
-            style={{
-              width: "50%",
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
-              fontSize: "150%",
-            }}
-          >
+          <div id="homepage-banner-text">
+            
             <div style={{ width: "50%" }}>
               <h1>Professional Skin Care Products +</h1>
               Good health is not just the absence of disease or illness, it is a
@@ -71,129 +65,93 @@ function Home() {
         }}
       >
         <h3 style={{ fontSize: "20px", padding: "30px" }}>Shop By Category</h3>
+        
+          <Container fluid style={{width:'90%'}}>
+            <Row>
+              <Col md={3} xs={6} style={{textAlign:'center'}}>
+                <div>
+                  {document && document.data.firstsquaretext[0].text}
+                </div>
+                
+                {/* image */}
+                <div className="home-category-images" style={{
+                  backgroundImage: `url(${document && document.data.firstsquareimage.url})`,
+                  backgroundSize: 'cover',
+                }} ></div>
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "90%",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              minWidth:'250px',
-              maxWidth:'33%',
-              aspectRatio:'1 / 1',
-            }}
-          >
-            <div style={{ paddingBottom: "10px" }}>
-              {document && document.data.firstsquaretext[0].text}
-            </div>
-            
-            {/* image */}
-            <div className="home-category-images" style={{
-              backgroundImage: `url(${document && document.data.firstsquareimage.url})`,
-              backgroundSize: 'cover',
-            }} ></div>
+              </Col>
 
-          </div>
+              <Col md={3} xs={6} style={{textAlign:'center'}}>
+                <div>
+                  {document && document.data.secondsquaretext[0].text}
+                </div>
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              minWidth:'250px',
-              maxWidth:'33%',
-              aspectRatio:'1 / 1',
-            }}
-          >
-            <div style={{ paddingBottom: "10px" }}>
-              {document && document.data.secondsquaretext[0].text}
-            </div>
+                {/* image */}
+                <div className="home-category-images" style={{
+                  backgroundImage: `url(${document && document.data.secondsquareimage.url})`,
+                  backgroundSize: 'cover',
+                }} >
 
-            {/* image */}
-            <div className="home-category-images" style={{
-              backgroundImage: `url(${document && document.data.secondsquareimage.url})`,
-              backgroundSize: 'cover',
-            }} >
+                </div>
+              </Col>
 
-            </div>
-          </div>
+              <Col md={3} xs={6} style={{textAlign:'center'}}>
+                <div>
+                  {document && document.data.thirdsquaretext[0].text}
+                </div>
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              minWidth:'250px',
-              maxWidth:'33%',
-              aspectRatio:'1 / 1',
-            }}
-          >
-            <div style={{ paddingBottom: "10px" }}>
-              {document && document.data.thirdsquaretext[0].text}
-            </div>
+                {/* image */}
+                <div className="home-category-images" style={{
+                  backgroundImage: `url(${document && document.data.thirdsquareimage.url})`,
+                  backgroundSize: 'cover',
+                }} ></div>
+                
+              </Col>
 
-            {/* image */}
-            <div className="home-category-images" style={{
-              backgroundImage: `url(${document && document.data.thirdsquareimage.url})`,
-              backgroundSize: 'cover',
-            }} ></div>
-            
-          </div>
+              <Col md={3} xs={6} style={{textAlign:'center'}}>
+                <div>
+                  {document && document.data.fourthsquaretext[0].text}
+                </div>
+                
+                {/* image */}
+                <div className="home-category-images" style={{
+                  backgroundImage: `url(${document && document.data.fourthsquareimage.url})`,
+                  backgroundSize: 'cover',
+                }} ></div>
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              minWidth:'250px',
-              maxWidth:'330px',
-              aspectRatio:'1 / 1',
-            }}
-          >
-            <div style={{ paddingBottom: "10px" }}>
-              {document && document.data.fourthsquaretext[0].text}
-            </div>
-            
-            {/* image */}
-            <div className="home-category-images" style={{
-              backgroundImage: `url(${document && document.data.fourthsquareimage.url})`,
-              backgroundSize: 'cover',
-            }} ></div>
-
-          </div>
-        </div>
+              </Col>
+            </Row>
+          </Container>
+    
 
         <div
           className="bg-light"
-          style={{ margin: "70px", width: "89%", height: "20%" }}
+          style={{ margin: "70px", width: "100%", height: "20%" }}
         >
-          <div
-            className="bg-light"
-            style={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "rows",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <div className="homepage-info-squares">Box 1</div>
-            <div className="homepage-info-squares">Box 1</div>
-            <div className="homepage-info-squares">Box 1</div>
-            <div className="homepage-info-squares">Box 1</div>
-          </div>
+          <Container style={{height:'100%'}}>
+            <Row style={{height:'100%'}}>
+              <Col className="homepage-info-squares">
+                <FontAwesomeIcon icon={faBagShopping} style={{width:'40px', height:'40px'}} />
+                <div>Shop</div>
+              </Col>
+
+              <Col className="homepage-info-squares">
+                <FontAwesomeIcon icon={faBookOpen} style={{width:'40px', height:'40px'}} />
+                <div>Learn</div>
+              </Col>
+
+              <Col className="homepage-info-squares">
+                <FontAwesomeIcon icon={faHeart} style={{width:'40px', height:'40px'}} />
+                <div>Our Vision</div>
+              </Col>
+
+              <Col className="homepage-info-squares">
+                <FontAwesomeIcon icon={faBookOpen} style={{width:'40px', height:'40px'}} />
+                <div>Contact Us</div>
+              </Col>
+
+            </Row>
+          </Container>
         </div>
       </div>
 
@@ -209,33 +167,25 @@ function Home() {
         >
           Favorite Products
         </h3>
-        <div style={{ margin: "70px", width: "89%" }}>
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "rows",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            {firstFourFavorites &&
-              firstFourFavorites.map((favoriteProduct) => {
-                return (
-                  <div
-                    className="homepage-info-squares"
-                    key={favoriteProduct.id}
-                  >
-                    <Product
-                      data={favoriteProduct.data}
-                      id={favoriteProduct.id}
-                      width={350}
-                    />
-                  </div>
-                );
-              })}
-          </div>
-        </div>
+
+        <Container fluid>
+            <Row>
+                {firstFourFavorites &&
+                  firstFourFavorites.map((favoriteProduct) => {
+                    return (
+                      <Col xs={12} sm={6} md={3}
+                        key={favoriteProduct.id}
+                      >
+                        <Product
+                          data={favoriteProduct.data}
+                          id={favoriteProduct.id}
+                          width={235}
+                        />
+                      </Col>
+                    );
+                  })}
+            </Row>
+          </Container>
       </div>
     </div>
   );

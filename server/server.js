@@ -29,7 +29,7 @@ const repoName = 'luloconline'
 const endpoint = prismic.getEndpoint(repoName)
 const client = prismic.createClient(endpoint, { fetch })
 
-const productsObjectForStripe = {}
+const productsObjectForStripe = new Map()
 
 
 // Prismic API Query & serialize for Stripe
@@ -38,53 +38,90 @@ const init = async () => {
 
     // Prismic API call to get product IDs and prices
     prismicDoc.forEach(product => {
-        productsObjectForStripe[product.id] = product.data['sale-price'] ? product.data['sale-price'] * 100 : product.data['original-price'] * 100
+        productsObjectForStripe[product.id] = {
+            name: product.data.name[0].text,
+            price: product.data['sale-price'] ? product.data['sale-price'] * 100 : product.data['original-price'] * 100,
+
+        }
     })
-
+}
     // Stripe Stuff
-
-    function getOrderAmounts(items,productsObjectForStripe) {
+    function getOrderSum(items,productsObjectForStripe) {
 
         const listOfAmounts = []
         
         // create an array of the totals from each line item
         items.forEach(item => {
             listOfAmounts.push(
-                productsObjectForStripe[item.id] * item.qty
+                productsObjectForStripe[item.id].price * item.qty
             )
         })
-
         // add up all of the values in the array
         return listOfAmounts.reduce((a,b) => a + b, 0)
     }
-    
-    const calculateOrderAmount = (items) => {
-        console.log(items)
-        console.log(getOrderAmounts(items,productsObjectForStripe))
-        return getOrderAmounts(items,productsObjectForStripe)
-      };
 
 
-    app.post("/create-payment-intent", cors(corsOptions), async (req, res) => {
+    function returnShippingOptions(items,productsObjectForStripe) {
+        if (getOrderSum(items,productsObjectForStripe) > 15000) {
+            return [
+                {shipping_rate: 'shr_1MIHoKHHalFjzBOnWUjpBFg8'}
+            ]
+        } else {
+            return [
+                {shipping_rate: 'shr_1MIEuLHHalFjzBOnsjZYx7SO'},
+                {shipping_rate: 'shr_1MIEvvHHalFjzBOnlScoRDrR'},
+                {shipping_rate: 'shr_1MIEwLHHalFjzBOnY9utK0D5'},
+                {shipping_rate: 'shr_1MIEx9HHalFjzBOnC71hOgmN'},
+            ]
+        }
+    }
+
+    app.post("/create-checkout-session", cors(corsOptions), async (req, res) => {
         console.log('POST')
-        const items = req.body
+        const items = req.body.items
+
+
+
+        const lineItemsObject = await items.map(item => {
+
+            return {
+                price_data: {
+                    currency: 'usd',
+                    tax_behavior: "exclusive",
+                    product_data: {
+                        name: productsObjectForStripe[item.id].name,
+                    },
+                    unit_amount: productsObjectForStripe[item.id].price,
+                },
+                quantity: item.qty,
+
+            }
+        })
+
+        // console.log(lineItemsObject)
     
-        // Create a PaymentIntent with the order amount and currency
-        const paymentIntent = await stripe.paymentIntents.create({
-            amount: calculateOrderAmount(items),
-            currency: "usd",
-            automatic_payment_methods: {
-            enabled: true,
-            },
-        });
-    
-        res.send({
-            clientSecret: paymentIntent.client_secret,
-        });
+        try {
+            const session = await stripe.checkout.sessions.create({
+                payment_method_types: ['card'],
+                mode: 'payment',
+                shipping_address_collection: {allowed_countries: ['US', 'CA']},
+                shipping_options: returnShippingOptions(items,productsObjectForStripe),
+                line_items: lineItemsObject,
+                automatic_tax: {
+                    enabled: true,
+                  },
+                success_url: `${process.env.REACT_APP_FRONTEND_URL}/success`,
+                cancel_url: `${process.env.REACT_APP_FRONTEND_URL}/products`,
+            })
+
+            console.log(returnShippingOptions(items,productsObjectForStripe))
+            res.json({url: session.url });
+        } catch ( e ) {
+            console.log(e.message)
+            res.status(500).json({error: e.message})
+        }    
     });
       
-  }
-
 
 init()
 
