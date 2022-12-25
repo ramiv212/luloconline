@@ -9,7 +9,7 @@ import {
 } from "../helperFunctions";
 
 
-function Cart({ appOverlayState, setAppOverlayState, shoppingCartState, setShoppingCartState }) {
+function Cart({ appOverlayState, setAppOverlayState, shoppingCartState }) {
 
   const [chekoutButtonDisabled, setCheckoutButtonDisabled] = useState(false)
 
@@ -44,12 +44,10 @@ function Cart({ appOverlayState, setAppOverlayState, shoppingCartState, setShopp
       })
      }
     ).then( res => {
-      if (res.ok){ 
-        setShoppingCartState([])
-        return res.json()
-      }
+      if (res.ok) return res.json()
       return res.json().then(json => Promise.reject(json))
     }).then(({ url }) => {
+      
       window.location = url
     }).catch(e => {
       console.error(e.error)
