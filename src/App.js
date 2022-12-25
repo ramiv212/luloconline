@@ -66,6 +66,7 @@ function App() {
             appOverlayState={appOverlayState}
             setAppOverlayState={setAppOverlayState}
             shoppingCartState={shoppingCartState}
+            setShoppingCartState={setShoppingCartState}
           />
 
           <div style={{ display: "flex", width: "100%" }}>
