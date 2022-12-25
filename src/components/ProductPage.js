@@ -1,66 +1,34 @@
 import React from "react";
 import { usePrismicDocumentByID,PrismicRichText } from "@prismicio/react";
+import { Container,Row,Col,Image } from 'react-bootstrap'
 import { useParams } from "react-router-dom";
 import { usFormatter } from '../helperFunctions'
 
-function ProductPage() {
+function ProductPage( { filter } ) {
   const { id } = useParams("id");
   const [product] = usePrismicDocumentByID(id);
 
   product && console.log(product);
 
   return (
-    <div
-      style={{
-        height: "calc(100vH - 200px)",
-        width: "100vw",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-evenly",
-          width: "80%",
-          height: "90%",
-        }}
-      >
+    <Container fluid style={{width:'90%',paddingTop:'25px',paddingBottom:'25px'}}>
+      <Row>
+        <Col lg={6} style={{padding:'25px',display:'flex',justifyContent:'center',alignItems:'center'}}>
         {/* product image */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-evenly",
-            width: "50%",
-            height: "85%",
-            margin: "auto",
-          }}
-        >
-          <img
+        <div>
+          <Image
             src={product && product.data.image.url}
             alt={product && product.data.name[0].text}
+            fluid
           />
         </div>
+      </Col>
+
+      <Col lg={6} style={{padding:'25px',display:'flex',justifyContent:'center',alignItems:'center'}}>
 
         {/* product title */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "start",
-            alignItems: "center",
-            height: "85%",
-            width: "50%",
-            margin: "auto",
-          }}
-        >
-          <h2>{product && product.data.name[0].text}</h2>
-
-          <div style={{ display: "flex", flexDirection: "row", alignItems:'center' }}>
-            <div style={{width:'80%', margin:'auto'}}>
+            <div style={{width:'100%', margin:'auto', display: "flex", flexDirection: "column", alignItems:'center',justifyContent:'center'}}>
+              <h2>{product && product.data.name[0].text}</h2>
               {product && product.data["sale-price"] ? <span style={{display:'flex', alignItems:'center',justifyContent:'center'}}>  
                 <span
                     className="text-danger"
@@ -94,7 +62,9 @@ function ProductPage() {
                         </span>
                     </span>
               }
-                <div>
+                <Container style={{paddingTop:'20px',width:'inherit',display:'flex',justifyContent:'center',alignItems:'center'}}>
+                  <Row style={{width:'90%'}}>
+                    <Col xl={4} style={{display:'flex',justifyContent:'center',alignItems:'center',marginTop:'20px',marginBottom:'20px'}}>
                     <select id='qty-dropdown' name='qty'>
                         <option value='1'>1</option>
                         <option value='2'>2</option>
@@ -106,21 +76,22 @@ function ProductPage() {
                         <option value='8'>8</option>
                         <option value='9'>9</option>
                         <option value='10'>10</option>
-
                     </select>
+                    </Col>
 
-                    <button className="product-card-button"> Add To Cart</button>
+                    <Col xl={8} style={{display:'flex', justifyContent:'end'}}>
+                      <button className="product-card-button" style={{width:'100%', marginLeft:'auto',right:0,marginTop:'20px',marginBottom:'20px'}}> Add To Cart</button>
+                    </Col>
+                  </Row>
+                </Container>
 
-                </div>
-
-              <div style={{paddingTop:'20px',paddingBottom:'20px'}}>
+              <div style={{paddingTop:'20px',paddingBottom:'20px', width:'80%'}}>
                 {product && <PrismicRichText field={product.data.description} />}
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      </Col>
+    </Row>
+    </Container>
   );
 }
 

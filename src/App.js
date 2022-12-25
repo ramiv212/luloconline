@@ -25,13 +25,11 @@ const logo = require("./images/LuloC_logo_webp.webp");
 // add animations to loading
 // add fade-in to items
 // add hover animation to items like cart, checkboxes,etc
-// responsive
-// image alts and tooltips for some things?
 // reviews?
 // logo link to homepage
-// make a payment completion page
 // creams and oils filters don't work
-// make a filter for sale items
+// out of stock option in prismic that greys out add to cart buttons
+// if product or filter don't exist, don't do anything
 
 function App() {
 
@@ -74,8 +72,9 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="/products" element={<Products />} />
-              <Route path="/products/:id" element={<ProductPage />} />
               <Route path="/learn" element={<Learn />} />
+              <Route path="/products/filter/:id" element={<Products />} />
+              <Route path="/products/:id" element={<ProductPage />} />
               <Route path="/vision" element={<Vision />} />
               <Route path="/policies" element={<Policies />} />
               <Route path="/contact" element={<Contact />} />

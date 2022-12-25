@@ -1,6 +1,5 @@
 import { React } from 'react'
-import { Image } from 'react-bootstrap'
-import { Container,Row,Col } from 'react-bootstrap'
+import { Container,Row,Col,Image } from 'react-bootstrap'
 import ca from '../images/ca.webp'
 import us from '../images/us.webp'
 import col from '../images/col.webp'

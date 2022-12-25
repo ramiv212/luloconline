@@ -2,16 +2,18 @@ import { usePrismicDocumentByUID } from '@prismicio/react';
 import { useContext,useState,useEffect } from 'react';
 import { ProductFilterContext } from '../ProductFilterContext';
 
-function Sidebar() {
+function Sidebar( { filter } ) {
   const [document] = usePrismicDocumentByUID('homepage', 'homepage')
   
   const {productFilter, setProductFilter} = useContext(ProductFilterContext)
 
   const [scrollHeight, setScrollHeight] = useState(null)
 
+  // scroll page to the top when loaded
   useEffect( () => {
     setScrollHeight(document && document.documentElement.scrollHeight)
   },[scrollHeight] )
+
 
   function removeFromArray(item,array) {
     const index = array.indexOf(item);
@@ -38,11 +40,16 @@ function Sidebar() {
   
 
   return (
-    <div id='sidebar-parent' style={{height: scrollHeight}}>
+    <div id='sidebar-parent' style={{height: scrollHeight, width:'265px'}}>
     <div id='sidebar-child' style={{position: 'sticky',top:0}}>
         <br />
         <span style={{fontWeight:"600"}}>Category - </span>
         {document ? Object.keys(document.data.categories[0]).map((category) => {
+
+            // if the category of this checkbox matches the filter, do not render this checkbox
+            // categories with two words have an underscore in between so I add one to the filter as well to help them match
+            if (filter && category.toLowerCase() === filter.toLowerCase().replace(' ','_')) return
+
             return <span className='sidebar-category' key={document.data.categories[0][category]}>
                 <input name="cssCheckbox" 
                     type={'checkbox'} 

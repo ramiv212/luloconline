@@ -14,7 +14,7 @@ function Learn() {
         }, [location]);
 
   return (
-    <Container flex className='learn-page-container'>
+    <Container className='learn-page-container'>
 
         <Row className='learn-page-row fade-in'>
             <Col className='learn-page-col order-last order-md-first' md={6}>
