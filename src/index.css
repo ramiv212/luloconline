@@ -78,6 +78,14 @@ code {
   opacity: 0;
 }
 
+
+.product-page-button {
+  background-color: rgb(153,164,130) !important;
+  border-style: none !important;
+  border-radius: 0 !important;
+  color:white;
+}
+
 .product-filter-title {
   font-size:'65px';
   position: relative;

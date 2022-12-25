@@ -35,7 +35,7 @@ function Product( {data,id,width} ) {
         <Button className={`product-card-button ${toggleCollapse} ${cartQtyState ? 'bg-danger' : ''}`} 
                     style={{backgroundColor: 'rgb(64,124,81)',position:'absolute', width:'100%', height:'35px',top:`${width - 35}px` }}
                     onClick={()=> {
-                        addToCart(id,shoppingCartState,setShoppingCartState)
+                        addToCart(id,shoppingCartState,setShoppingCartState,1)
                     }}>
                         { cartQtyState ? <>Added To Cart (&nbsp;{cartQtyState}&nbsp;)</> : <>Add To Cart</>}
         </Button>

@@ -14,10 +14,10 @@ function returnItemQtyByID(shoppingCartState,itemID) {
 }
 
 // shopping cart logic
-export function addToCart(id,shoppingCartState,setShoppingCartState) {
+export function addToCart(id,shoppingCartState,setShoppingCartState,qty) {
     const productCartObject = {
         id: id,
-        qty: 1,
+        qty: qty,
     }
 
     // check if item already exists in shopping cart array
@@ -26,7 +26,7 @@ export function addToCart(id,shoppingCartState,setShoppingCartState) {
    if (item) {
     // if item already exists, add one to it's qty
         let newState = [...shoppingCartState]
-        newState[newState.indexOf(item)].qty ++
+        newState[newState.indexOf(item)].qty += qty
         setShoppingCartState(newState)
    } else {
     // if item does not exist, add it to the shopping cart array

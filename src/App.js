@@ -21,6 +21,9 @@ import Contact from "./components/Contact";
 const logo = require("./images/LuloC_logo_webp.webp");
 
 // TODOS
+// flags look terrible on mobile
+// product page add to cart button is short on mobile
+// make the four homepage squares work
 // Make the error page pretty
 // add animations to loading
 // add fade-in to items

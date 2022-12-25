@@ -27,7 +27,18 @@ function Navigation() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Link className='nav-link' to='/'>Home</Link>
-            <Link className='nav-link' to='/products'>Products</Link>
+            <NavDropdown title="Products" id="basic-nav-dropdown"> 
+              <NavDropdown.Item href="/products">All</NavDropdown.Item>
+              <NavDropdown.Item href="/products/filter/cannabis%20based">Cannabis Based</NavDropdown.Item>
+              <NavDropdown.Item href="/products/filter/tumeric%20based">Tumeric Based</NavDropdown.Item>
+              <NavDropdown.Item href="/products/filter/eyes">Eyes</NavDropdown.Item>
+              <NavDropdown.Item href="/products/filter/face">Face</NavDropdown.Item>
+              <NavDropdown.Item href="/products/filter/body">Body</NavDropdown.Item>
+              <NavDropdown.Item href="/products/filter/kits">Kits</NavDropdown.Item>
+              <NavDropdown.Item href="/products/filter/creams">Creams</NavDropdown.Item>
+              <NavDropdown.Item href="/products/filter/oils">Oils</NavDropdown.Item>
+              <NavDropdown.Item href="/products/filter/sunscreen">Sunscreen</NavDropdown.Item>
+            </NavDropdown>
             <Link className='nav-link' to='/learn'>Learn</Link>
             <NavDropdown title="More" id="basic-nav-dropdown">
               <NavDropdown.Item href="/vision">Vision</NavDropdown.Item>

@@ -7,7 +7,7 @@ function Success() {
   const navigate = useNavigate()
 
   return (
-    <div style={{display:'flex', alignItems:'center', justifyContent:'center',width:'100%', height:'calc(100vh - 255px)',flexDirection:'column', gap:'30px'}}>
+    <div style={{display:'flex', alignItems:'center', justifyContent:'center',textAlign:'center',width:'90%',margin:'auto', height:'calc(100vh - 255px)',flexDirection:'column', gap:'30px'}}>
 
         <h1 style={{color:'rgb(115,125,98)'}}>Thank you for your order!</h1>
         <h2>You will receive an order confirmation email soon</h2>

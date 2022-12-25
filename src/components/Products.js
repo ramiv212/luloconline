@@ -36,7 +36,7 @@ function Products() {
             {id ? <Row style={{textAlign:'center'}}>
                 <h1 className='product-filter-title'>{id.toUpperCase()}</h1>
                 </Row>: ''}
-                <Row>
+                <Row style={{marginTop:'46px'}}>
                 {products && Object.keys(products.results).map((index => {
                     return <Product data={products.results[index].data} id={products.results[index].id} width={275} key={products.results[index].id} />
             }))}
