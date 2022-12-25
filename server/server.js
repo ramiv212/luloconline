@@ -160,9 +160,11 @@ const init = async () => {
 
 
     app.post("/send-contact-form", cors(corsOptions), async (req, res) => {
+        console.log(req.body)
+        
         const email = req.body.email
         const name = req.body.name
-        const cell = req.body.cell
+        const cell = req.body.phone
         const message = req.body.message
 
         sendContactEmail(name,email,cell,message,res)

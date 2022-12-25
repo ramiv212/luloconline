@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ProductFilterContext } from "./ProductFilterContext";
 import { ShoppingCartContext } from "./ShoppingCartContext";
+import useLocalStorage from "./useLocalStorage";
 import Topbar from "./components/Topbar";
 import Navigation from "./components/Navigation";
 import Home from "./components/Home";
@@ -33,8 +34,9 @@ const logo = require("./images/LuloC_logo_webp.webp");
 // make a filter for sale items
 
 function App() {
+
   const [productFilter, setProductFilter] = useState([]);
-  const [shoppingCartState, setShoppingCartState] = useState([]);
+  const [shoppingCartState,setShoppingCartState] = useLocalStorage('cartState',[]);
   const [appOverlayState, setAppOverlayState] = useState(false);
 
   return (
