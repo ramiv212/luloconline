@@ -144,17 +144,17 @@ function Home() {
                 <div>Shop</div>
               </Col>
 
-              <Col className="homepage-info-squares">
+              <Col className="homepage-info-squares" onClick={() => {routeChange('/learn')}}>
                 <FontAwesomeIcon icon={faBookOpen} style={{width:'40px', height:'40px'}} />
                 <div>Learn</div>
               </Col>
 
-              <Col className="homepage-info-squares">
+              <Col className="homepage-info-squares" onClick={() => {routeChange('/vision')}}>
                 <FontAwesomeIcon icon={faHeart} style={{width:'40px', height:'40px'}} />
                 <div>Our Vision</div>
               </Col>
 
-              <Col className="homepage-info-squares">
+              <Col className="homepage-info-squares" onClick={() => {routeChange('/contact')}}>
                 <FontAwesomeIcon icon={faBookOpen} style={{width:'40px', height:'40px'}} />
                 <div>Contact Us</div>
               </Col>

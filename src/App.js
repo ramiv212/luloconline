@@ -10,10 +10,13 @@ import Products from "./components/Products";
 import Cart from "./components/Cart";
 import ErrorPage from "./components/ErrorPage";
 import ProductPage from "./components/ProductPage";
-import Checkout from "./components/Checkout";
+// import Checkout from "./components/Checkout";
 import Success from "./components/Success";
 import Footer from "./components/Footer"
 import Learn from "./components/Learn";
+import Vision from "./components/Vision";
+import Policies from "./components/Policies";
+import Contact from "./components/Contact";
 const logo = require("./images/LuloC_logo_webp.webp");
 
 // TODOS
@@ -70,6 +73,9 @@ function App() {
               <Route path="/products" element={<Products />} />
               <Route path="/products/:id" element={<ProductPage />} />
               <Route path="/learn" element={<Learn />} />
+              <Route path="/vision" element={<Vision />} />
+              <Route path="/policies" element={<Policies />} />
+              <Route path="/contact" element={<Contact />} />
 
               {/* <Route path="/checkout" element={<Checkout 
                 shoppingCartState={shoppingCartState}

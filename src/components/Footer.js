@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
-    <div style={{height:'100px',
+    <div style={{height:'50px',
         backgroundColor:'rgb(153,164,130)',
         width:'100%',
         display:'flex',
@@ -10,7 +11,16 @@ function Footer() {
         alignItems:'center'}}
         
         id="footer">
-      Footer
+      <div style={{width:'80%'}}>
+        
+        <Link to={'/home'} className='footer-link'>Home</Link>&nbsp; | &nbsp;
+        <Link to={'/products'} className='footer-link'>Products</Link>&nbsp; | &nbsp;
+        <Link to={'/learn'} className='footer-link'>Learn</Link>&nbsp; | &nbsp;
+        <Link to={'/vision'} className='footer-link'>Vision</Link>&nbsp; | &nbsp;
+        <Link to={'/policies'} className='footer-link'>Policies</Link>&nbsp; | &nbsp; 
+        <Link to={'/contact'} className='footer-link'>Contact</Link>&nbsp; | &nbsp;
+
+      </div>
     </div>
   )
 }

@@ -1,14 +1,22 @@
 import React from 'react'
+import { useEffect } from "react";
+import { useLocation } from "react-router";
 import { Container,Row,Col,Image } from 'react-bootstrap'
 import healthyLiving from '../images/vida saludable_edited.webp'
 import tumeric from '../images/turmeric-powder-and-turmeric-root.webp'
 import cbd from '../images/cannabis-oil.webp'
 
 function Learn() {
+
+        const location = useLocation();
+        useEffect(() => {
+          window.scrollTo(0, 0);
+        }, [location]);
+
   return (
     <Container flex className='learn-page-container'>
 
-        <Row className='learn-page-row'>
+        <Row className='learn-page-row fade-in'>
             <Col className='learn-page-col order-last order-md-first' md={6}>
                 <h1> The benefits of healthy living</h1>
                 
@@ -23,7 +31,7 @@ function Learn() {
             </Col>
         </Row>
 
-        <Row className='learn-page-row'>
+        <Row className='learn-page-row fade-in'>
             <Col className='learn-page-col' md={6}>
                 <Image src={tumeric} fluid></Image>
             </Col>
@@ -40,7 +48,7 @@ function Learn() {
             </Col>
         </Row>
 
-        <Row className='learn-page-row'>
+        <Row className='learn-page-row fade-in'>
             <Col className='learn-page-col order-last order-md-first' md={6}>
                 <h1> The benefits of CBD</h1>
                 

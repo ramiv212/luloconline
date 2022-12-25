@@ -5,11 +5,47 @@ import * as prismicH from '@prismicio/helpers'
 import fetch from 'node-fetch'
 import * as dotenv from 'dotenv';
 import cors from 'cors';
+import nodemailer from 'nodemailer';
 
-const stripe = new Stripe('sk_test_51MHH3RHHalFjzBOnkKCpGKAGagFZI1HOVHhgZphYtdmpjm4qNYy29G9V9wQZge5AKAtCXqnwcPCzmd0UsQrG6g4S00ZW3RnMNx');
+const stripe = new Stripe(process.env.REACT_APP_STRIPE_KEY);
 
 // start dotenv to use environment variables
 dotenv.config();
+
+
+// nodemailer Stuff
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'ramiv212@gmail.com',
+      pass: process.env.REACT_APP_GMAIL_PASS
+    }
+  });
+
+
+  function sendContactEmail(name,email,cell,message,res) {
+    const mailOptions = {
+        from: email,
+        to: 'ramiv212@hotmail.com',
+        subject: `You got a message via luloconline.com from ${name}!`,
+        text: `
+        email: ${email}
+        name: ${name}
+        cell: ${cell}
+        message ${message}`
+    };
+    
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+        console.log(error);
+        res.status(500).json({error: e.message})
+
+        } else {
+        console.log('Email sent: ' + info.response);
+        res.status(200).send('success!')
+        }
+    });
+  }
 
 
 // Express Stuff
@@ -121,6 +157,17 @@ const init = async () => {
             console.log(e.message)
             res.status(500).json({error: e.message})
         }    
+    });
+
+
+    app.post("/send-contact-form", cors(corsOptions), async (req, res) => {
+        const email = req.body.email
+        const name = req.body.name
+        const cell = req.body.cell
+        const message = req.body.message
+
+        sendContactEmail(name,email,cell,message,res)
+
     });
       
 

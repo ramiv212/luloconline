@@ -1,5 +1,5 @@
 import { usePrismicDocumentByUID } from '@prismicio/react';
-import { useContext } from 'react';
+import { useContext,useState,useEffect } from 'react';
 import { ProductFilterContext } from '../ProductFilterContext';
 
 function Sidebar() {
@@ -7,6 +7,11 @@ function Sidebar() {
   
   const {productFilter, setProductFilter} = useContext(ProductFilterContext)
 
+  const [scrollHeight, setScrollHeight] = useState(null)
+
+  useEffect( () => {
+    setScrollHeight(document && document.documentElement.scrollHeight)
+  },[scrollHeight] )
 
   function removeFromArray(item,array) {
     const index = array.indexOf(item);
@@ -33,7 +38,8 @@ function Sidebar() {
   
 
   return (
-    <div id='sidebar'>
+    <div id='sidebar-parent' style={{height: scrollHeight}}>
+    <div id='sidebar-child' style={{position: 'sticky',top:0}}>
         <br />
         <span style={{fontWeight:"600"}}>Category - </span>
         {document ? Object.keys(document.data.categories[0]).map((category) => {
@@ -51,6 +57,7 @@ function Sidebar() {
                 <br/> </span>
         }) : ""}
 
+    </div>
     </div>
   )
 }
