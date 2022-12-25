@@ -7,11 +7,10 @@ import * as dotenv from 'dotenv';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
 
-const stripe = new Stripe(process.env.REACT_APP_STRIPE_KEY);
-
 // start dotenv to use environment variables
 dotenv.config();
 
+const stripe = new Stripe(process.env.REACT_APP_STRIPE_KEY);
 
 // nodemailer Stuff
 const transporter = nodemailer.createTransport({

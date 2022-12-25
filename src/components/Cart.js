@@ -7,7 +7,6 @@ import {
   returnFullCartTotal, 
   usFormatter,
 } from "../helperFunctions";
-import { loadStripe } from "@stripe/stripe-js";
 
 
 function Cart({ appOverlayState, setAppOverlayState, shoppingCartState }) {
