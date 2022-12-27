@@ -17,7 +17,7 @@ function ProductPage() {
 
   useEffect(() => {
     shoppingCartState && setCartQtyState(returnCartQtyFromID(shoppingCartState,id))
-    console.log(product && product.data)
+    console.log([product && product.data])
   }, [id,shoppingCartState])
 
 

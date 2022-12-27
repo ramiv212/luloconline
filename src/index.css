@@ -170,6 +170,10 @@ code {
   margin-bottom: 10px;
 }
 
+#sale-checkbox-span {
+  margin-left: 3px;
+  margin-top: 10px;
+}
 
 .css-checkbox { 
   position: absolute; 
@@ -426,6 +430,13 @@ code {
   width: 100px;
   height: 40px;
   border-radius: 0;
+  text-align: center;
+    text-align-last: center;
+    -moz-text-align-last: center;
+  background-color: white;
+  border-color: black;
+  color: black;
+
 }
 
 #qty-dropdown :focus {

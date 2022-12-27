@@ -33,7 +33,10 @@ const logo = require("./images/LuloC_logo_png.png");
 
 function App() {
 
-  const [productFilter, setProductFilter] = useState([]);
+  const [productFilter, setProductFilter] = useState({
+    filter: [],
+    sale:false,
+  });
   const [shoppingCartState,setShoppingCartState] = useLocalStorage('cartState',[]);
   const [appOverlayState, setAppOverlayState] = useState(false);
 
@@ -75,6 +78,8 @@ function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/products" element={<Products />} />
               <Route path="/learn" element={<Learn />} />
+              <Route path="/products/all/:sale" element={<Products />} />
+              <Route path="/products/filter/:id" element={<Products />} />
               <Route path="/products/filter/:id" element={<Products />} />
               <Route path="/products/:id" element={<ProductPage />} />
               <Route path="/mission" element={<Mission />} />

@@ -2,7 +2,7 @@ import { usePrismicDocumentByUID } from '@prismicio/react';
 import { useContext,useState,useEffect } from 'react';
 import { ProductFilterContext } from '../ProductFilterContext';
 
-function Sidebar( { filter } ) {
+function Sidebar( { filter,sale } ) {
   const [document] = usePrismicDocumentByUID('homepage', 'homepage')
   
   const {productFilter, setProductFilter} = useContext(ProductFilterContext)
@@ -26,6 +26,7 @@ function Sidebar( { filter } ) {
   // are rendered in the products component. On checkbox change, it will either add an item or remove it if it exists.
   function chekboxFunction(checkboxID,filter) {
     let lowerCaseID = checkboxID.toLowerCase()
+    console.log(filter)
     let newFilter = [...filter]
     // if the item is found in the array
     if (newFilter.includes(lowerCaseID)) {
@@ -57,13 +58,35 @@ function Sidebar( { filter } ) {
                     className="css-checkbox" 
                     id={document.data.categories[0][category]}
                     onChange={(e) => {
-                        setProductFilter(chekboxFunction(e.target.id,productFilter))
+                        setProductFilter({
+                          filter: chekboxFunction(e.target.id,productFilter.filter),
+                          sale: productFilter.sale
+                        })
                     }}
                     >
                     </input>&nbsp;
                 <label htmlFor={document.data.categories[0][category]}>&nbsp;&nbsp;{document.data.categories[0][category]} </label>
                 <br/> </span>
         }) : ""}
+        
+        {/* this checkbox will enable filtering by sale. It will change the sale object of the productFilter context */}
+        {!sale ? <span id='sale-checkbox-span'>
+          <input type={'checkbox'} className="css-checkbox" id='sale-checkbox' onChange={(e) => {
+            console.log(e.target.checked)
+            if (e.target.checked) {
+              setProductFilter({
+                filter: productFilter.filter,
+                sale: true,
+              })
+            } else {
+              setProductFilter({
+                filter: productFilter.filter,
+                sale: false,
+              })
+            }
+          }}></input>
+          <label htmlFor='sale-checkbox'>&nbsp;&nbsp;&nbsp;Sale</label>
+        </span> : ""}
 
     </div>
     </div>
