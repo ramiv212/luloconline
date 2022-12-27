@@ -446,6 +446,8 @@ code {
 #qty-bar {
   width: 75%;
   margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .sticky {
@@ -493,6 +495,10 @@ code {
   .learn-page-row {
     padding-top: 50px;
     padding-bottom: 50px;
+  }
+
+  .product-card-button {
+    opacity: 1 !important;
   }
 
  }

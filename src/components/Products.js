@@ -53,7 +53,11 @@ function Products() {
         <div id='qty-bar'>
             {products && <span style={{fontWeight:'700'}}>All Items ( {products.results.length} )</span>}
             <span style={{float: 'right',fontWeight:'700'}}>Sort By: &nbsp;
-                <select style={{borderRadius:0}}
+                <select style={{borderRadius:0, 
+                backgroundColor:'transparent', 
+                color:'black',
+                borderColor:'black'}}
+
                     onChange={(e) => {
                         console.log(e.target.value)
                             switch (e.target.value) {

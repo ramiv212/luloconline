@@ -15,6 +15,9 @@ function Product( {data,id,width} ) {
     const [cartQtyState,setCartQtyState] = useState(null)
 
     const { shoppingCartState,setShoppingCartState } = useContext(ShoppingCartContext)
+
+    const mediaQuery = window.matchMedia('(min-width: 991px)')
+    
     
     useEffect(() => {
       shoppingCartState && setCartQtyState(returnCartQtyFromID(shoppingCartState,id))
@@ -29,8 +32,11 @@ function Product( {data,id,width} ) {
 
   return (
     <Card style={{width: `${width}px`}} className={'product-card'}
-        onMouseEnter={() => {setToggleCollapse('animate-bottom')}}
-        onMouseLeave={() => {setToggleCollapse('animate-away')}}>
+        // fade-in and out animation for 'add to cart' button. If media query is larger than
+        // 991px then animation is not added and button stays solid
+        // it remains solid because there is a css media query that sets it to transparency:1 !important;
+        onMouseEnter={() => { if(mediaQuery.matches) setToggleCollapse('animate-bottom')}}
+        onMouseLeave={() => { if(mediaQuery.matches) setToggleCollapse('animate-away')}}>
         
         <Button 
         
