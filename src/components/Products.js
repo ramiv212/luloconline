@@ -57,7 +57,7 @@ function Products() {
                 backgroundColor:'transparent', 
                 color:'black',
                 borderColor:'black'}}
-
+                defaultValue={''}
                     onChange={(e) => {
                         console.log(e.target.value)
                             switch (e.target.value) {
@@ -79,7 +79,7 @@ function Products() {
                         }
                     }
                 >
-                    <option disabled={true} selected></option>
+                    <option disabled={true}></option>
                     <option>Alphabetical</option>
                     <option>Price: High to Low</option>
                     <option>Price: Low to High</option>
