@@ -22,7 +22,8 @@ function Sidebar( { filter } ) {
     }
   }
 
-
+  // this function adds or removes an item to the filter state that filters what products
+  // are rendered in the products component. On checkbox change, it will either add an item or remove it if it exists.
   function chekboxFunction(checkboxID,filter) {
     let lowerCaseID = checkboxID.toLowerCase()
     let newFilter = [...filter]

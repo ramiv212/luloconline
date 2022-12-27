@@ -1,6 +1,6 @@
 import "./index.css";
 import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route,useNavigate } from "react-router-dom";
 import { ProductFilterContext } from "./ProductFilterContext";
 import { ShoppingCartContext } from "./ShoppingCartContext";
 import useLocalStorage from "./useLocalStorage";
@@ -15,15 +15,12 @@ import ProductPage from "./components/ProductPage";
 import Success from "./components/Success";
 import Footer from "./components/Footer"
 import Learn from "./components/Learn";
-import Vision from "./components/Vision";
+import Mission from "./components/Mission";
 import Policies from "./components/Policies";
 import Contact from "./components/Contact";
-const logo = require("./images/LuloC_logo_webp.webp");
+const logo = require("./images/LuloC_logo_png.png");
 
 // TODOS
-// flags look terrible on mobile
-// product page add to cart button is short on mobile
-// make the four homepage squares work
 // Make the error page pretty
 // add animations to loading
 // add fade-in to items
@@ -39,6 +36,8 @@ function App() {
   const [productFilter, setProductFilter] = useState([]);
   const [shoppingCartState,setShoppingCartState] = useLocalStorage('cartState',[]);
   const [appOverlayState, setAppOverlayState] = useState(false);
+
+  const navigate = useNavigate()
 
   return (
     <div className="App">
@@ -57,7 +56,7 @@ function App() {
 
           <Topbar />
 
-          <img src={logo} width="200px" alt="LuloCo Online" />
+          <img src={logo} width="200px" alt="LuloCo Online" onClick={() => {navigate('/home')}} style={{cursor:'pointer',paddingTop:'25px'}} />
 
           <div id="navigation-container">
             <Navigation id={"navigation"} />
@@ -78,7 +77,7 @@ function App() {
               <Route path="/learn" element={<Learn />} />
               <Route path="/products/filter/:id" element={<Products />} />
               <Route path="/products/:id" element={<ProductPage />} />
-              <Route path="/vision" element={<Vision />} />
+              <Route path="/mission" element={<Mission />} />
               <Route path="/policies" element={<Policies />} />
               <Route path="/contact" element={<Contact />} />
 

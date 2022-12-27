@@ -16,7 +16,7 @@ function Footer() {
         <Link to={'/home'} className='footer-link'>Home</Link>&nbsp; | &nbsp;
         <Link to={'/products'} className='footer-link'>Products</Link>&nbsp; | &nbsp;
         <Link to={'/learn'} className='footer-link'>Learn</Link>&nbsp; | &nbsp;
-        <Link to={'/vision'} className='footer-link'>Vision</Link>&nbsp; | &nbsp;
+        <Link to={'/mission'} className='footer-link'>Mission</Link>&nbsp; | &nbsp;
         <Link to={'/policies'} className='footer-link'>Policies</Link>&nbsp; | &nbsp; 
         <Link to={'/contact'} className='footer-link'>Contact</Link>&nbsp; | &nbsp;
 

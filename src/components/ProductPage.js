@@ -13,10 +13,11 @@ function ProductPage() {
   const [cartQtyState,setCartQtyState] = useState(null)
   const { shoppingCartState,setShoppingCartState } = useContext(ShoppingCartContext)
 
-  const [dropdownValue,setDropdownValue] = useState(null)
+  const [dropdownValue,setDropdownValue] = useState(1)
 
   useEffect(() => {
     shoppingCartState && setCartQtyState(returnCartQtyFromID(shoppingCartState,id))
+    console.log(product && product.data)
   }, [id,shoppingCartState])
 
 
@@ -91,11 +92,19 @@ function ProductPage() {
                     </Col>
 
                     <Col xl={8} style={{display:'flex', justifyContent:'end'}}>
-                      <button className ={`product-page-button ${cartQtyState ? 'bg-danger' : ''}`} style={{width:'100%', marginLeft:'auto',right:0,marginTop:'20px',marginBottom:'20px'}}
+                      <button className ={`${product && (product.data.outofstock) ? 'bg-secondary' : ''}  product-page-button ${cartQtyState ? 'bg-danger' : ''}`} 
+                      style={{width:'100%', 
+                      height:'40px', 
+                      marginLeft:'auto',
+                      right:0,marginTop:'20px',
+                      marginBottom:'20px',
+                      backgroundColor:'rgb(153,164,130)'
+                    }}
+
                       onClick={()=> {
-                        addToCart(id,shoppingCartState,setShoppingCartState,parseInt(dropdownValue))
-                    }}>
-                        { cartQtyState ? <>Added To Cart (&nbsp;{cartQtyState}&nbsp;)</> : <>Add To Cart</>}</button>
+                        addToCart(id,shoppingCartState,setShoppingCartState,parseInt(dropdownValue))}}
+                        disabled={product && product.data.outofstock}>
+                        {product && (!product.data.outofstock) ? <>{ cartQtyState ? <>Added To Cart (&nbsp;{cartQtyState}&nbsp;)</> : <>Add To Cart</>}</> : <>Out Of Stock</>}</button>
                     </Col>
                   </Row>
                 </Container>

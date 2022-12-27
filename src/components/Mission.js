@@ -1,26 +1,26 @@
 import { React } from 'react'
 import { Container,Row,Col,Image } from 'react-bootstrap'
-import ca from '../images/ca.webp'
+import ca from '../images/ca.png'
 import us from '../images/us.webp'
-import col from '../images/col.webp'
+import col from '../images/col.png'
 
 
-function Vision() {
+function Mission() {
   return (
     <Container style={{paddingTop:'40px',paddingBottom:'40px'}}>
-        <Row style={{height:'100%'}}>
-            <Col style={{display:'flex',justifyContent:'center',alignItems:'flex-start',height:'100%'}}>
+        <Row>
+            <Col style={{display:'flex',justifyContent:'center',alignItems:'flex-start'}}>
             
                 <Container>
                     <Row>
                         <Col>
-                            <Image src={ca} className={'h-100'} fluid></Image>
+                            <Image src={ca} fluid></Image>
                         </Col>
                         <Col>
-                            <Image src={us} className={'h-100'} fluid></Image>
+                            <Image src={us} fluid></Image>
                         </Col>
                         <Col>
-                            <Image src={col} className={'h-100'} fluid></Image>
+                            <Image src={col} fluid></Image>
                         </Col>
                     </Row>
 
@@ -51,4 +51,4 @@ function Vision() {
   )
 }
 
-export default Vision
+export default Mission

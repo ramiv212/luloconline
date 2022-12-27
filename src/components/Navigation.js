@@ -41,7 +41,7 @@ function Navigation() {
             </NavDropdown>
             <Link className='nav-link' to='/learn'>Learn</Link>
             <NavDropdown title="More" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/vision">Vision</NavDropdown.Item>
+              <NavDropdown.Item href="/mission">Mission</NavDropdown.Item>
               <NavDropdown.Item href="/policies">
                 Policies
               </NavDropdown.Item>              

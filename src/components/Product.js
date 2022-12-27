@@ -32,12 +32,20 @@ function Product( {data,id,width} ) {
         onMouseEnter={() => {setToggleCollapse('animate-bottom')}}
         onMouseLeave={() => {setToggleCollapse('animate-away')}}>
         
-        <Button className={`product-card-button ${toggleCollapse} ${cartQtyState ? 'bg-danger' : ''}`} 
-                    style={{backgroundColor: 'rgb(64,124,81)',position:'absolute', width:'100%', height:'35px',top:`${width - 35}px` }}
-                    onClick={()=> {
-                        addToCart(id,shoppingCartState,setShoppingCartState,1)
-                    }}>
-                        { cartQtyState ? <>Added To Cart (&nbsp;{cartQtyState}&nbsp;)</> : <>Add To Cart</>}
+        <Button 
+        
+        className={`
+        ${(data.outofstock) ? 'bg-secondary' : ''}  product-page-button ${cartQtyState ? 'bg-danger' : ''}
+        product-card-button 
+        ${toggleCollapse} 
+        ${cartQtyState ? 'bg-danger' : ''}
+        `}
+
+        style={{backgroundColor: 'rgb(64,124,81)',position:'absolute', width:'100%', height:'35px',top:`${width - 35}px`,opacity:0 }}
+        onClick={()=> {
+            addToCart(id,shoppingCartState,setShoppingCartState,1)}}
+        disabled={data.outofstock}>
+            {data.outofstock ? <>Out Of Stock</> : <>{cartQtyState ? <>Added To Cart (&nbsp;{cartQtyState}&nbsp;)</> : <>Add To Cart</>}</>}
         </Button>
         <Card.Img variant="top" src={data.image.url} className="card-image" onClick={productPageRoute} alt={data.name[0].text} />
         

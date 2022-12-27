@@ -22,7 +22,7 @@ function Home() {
     firstFourFavorites = Object.values(favorites.results).slice(0, 4);
   }
 
-  // this hook is for clicking on 
+  // this is for clicking on elements to navigate to new page
   let navigate = useNavigate(); 
   const routeChange = (route) =>{ 
     let path = route;
@@ -77,7 +77,7 @@ function Home() {
         
           <Container fluid style={{width:'90%'}}>
             <Row>
-              <Col md={3} xs={6} style={{textAlign:'center'}}>
+              <Col md={3} xs={6} style={{textAlign:'center', cursor:'pointer'}} onClick={() => {routeChange(document && document.data.firstsquarelink)}}>
                 <div>
                   {document && document.data.firstsquaretext[0].text}
                 </div>
@@ -90,7 +90,7 @@ function Home() {
 
               </Col>
 
-              <Col md={3} xs={6} style={{textAlign:'center'}}>
+              <Col md={3} xs={6} style={{textAlign:'center', cursor:'pointer'}} onClick={() => {routeChange(document && document.data.secondsquarelink)}}>
                 <div>
                   {document && document.data.secondsquaretext[0].text}
                 </div>
@@ -104,7 +104,7 @@ function Home() {
                 </div>
               </Col>
 
-              <Col md={3} xs={6} style={{textAlign:'center'}}>
+              <Col md={3} xs={6} style={{textAlign:'center', cursor:'pointer'}} onClick={() => {routeChange(document && document.data.thirdsquarelink)}}>
                 <div>
                   {document && document.data.thirdsquaretext[0].text}
                 </div>
@@ -117,7 +117,7 @@ function Home() {
                 
               </Col>
 
-              <Col md={3} xs={6} style={{textAlign:'center'}}>
+              <Col md={3} xs={6} style={{textAlign:'center', cursor:'pointer'}} onClick={() => {routeChange(document && document.data.fourthsquarelink)}}>
                 <div>
                   {document && document.data.fourthsquaretext[0].text}
                 </div>
