@@ -1,4 +1,4 @@
-import { React,useContext,useEffect } from 'react';
+import { React,useContext,useState } from 'react';
 import '../index.css';
 import Product from './Product';
 import { usePrismicDocumentsByType ,usePrismicDocuments} from '@prismicio/react';
@@ -8,12 +8,15 @@ import Sidebar from './Sidebar';
 import { Container, Row } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
 
-function Products() {
+function Products() { 
 
 
-    const {productFilter, setProductFilter} = useContext(ProductFilterContext)
+    const {productFilter} = useContext(ProductFilterContext)
 
     const { id,sale } = useParams("id");
+
+    const [orderings,setOrderings] = useState('')
+
 
     // this function will return an array of predicates with an extra predicate to filter for items on sale
     // if the param of sale in the productFilter context is set to true
@@ -38,7 +41,8 @@ function Products() {
     }
 
     const [products, { state, error }] = usePrismicDocumentsByType('product',{
-        predicates: returnPredicates(productFilter)
+        predicates: returnPredicates(productFilter),
+        orderings: orderings
     });
 
 
@@ -48,7 +52,34 @@ function Products() {
     <div style={{display:'flex', flexDirection:'column', width:'100%'}}>
         <div id='qty-bar'>
             {products && <span style={{fontWeight:'700'}}>All Items ( {products.results.length} )</span>}
-            {/* <span style={{float: 'right',fontWeight:'700'}}>Sort By:</span> */}
+            <span style={{float: 'right',fontWeight:'700'}}>Sort By: &nbsp;
+                <select style={{borderRadius:0}}
+                    onChange={(e) => {
+                        console.log(e.target.value)
+                            switch (e.target.value) {
+                                case 'Alphabetical':
+                                    setOrderings(['my.product.name'])
+                                    break;
+                                case 'Price: High to Low':
+                                    setOrderings(['my.product.original-price desc',
+                                                'my.product.sale-price desc'])
+                                    break;
+                                case 'Price: Low to High':
+                                    setOrderings(['my.product.original-price',
+                                    'my.product.sale-price'])
+                                    break
+                                default:
+                                    setOrderings('')
+                                    break;
+                            }
+                        }
+                    }
+                >
+                    <option disabled={true} selected></option>
+                    <option>Alphabetical</option>
+                    <option>Price: High to Low</option>
+                    <option>Price: Low to High</option>
+                </select></span>
         </div>
             <Container fluid>
             {/* check if URL params have either a product type or sale */}

@@ -26,9 +26,6 @@ const logo = require("./images/LuloC_logo_png.png");
 // add fade-in to items
 // add hover animation to items like cart, checkboxes,etc
 // reviews?
-// logo link to homepage
-// creams and oils filters don't work
-// out of stock option in prismic that greys out add to cart buttons
 // if product or filter don't exist, don't do anything
 
 function App() {

@@ -9,9 +9,8 @@ function Sidebar( { filter,sale } ) {
 
   const [scrollHeight, setScrollHeight] = useState(null)
 
-  // scroll page to the top when loaded
   useEffect( () => {
-    setScrollHeight(document && document.documentElement.scrollHeight)
+    document && setScrollHeight(document && document.documentElement.scrollHeight)
   },[scrollHeight] )
 
 
