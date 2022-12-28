@@ -5,6 +5,9 @@ import { useParams } from "react-router-dom";
 import { usFormatter } from '../helperFunctions'
 import { addToCart,returnCartQtyFromID } from '../helperFunctions'
 import { ShoppingCartContext } from '../ShoppingCartContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { faStar as faStarHollow } from '@fortawesome/free-regular-svg-icons'
 import Review from "./Review";
 
 function ProductPage() {
@@ -17,20 +20,40 @@ function ProductPage() {
   });
 
   const [thisProductReviews, setThisProductReviews] = useState([])
+  const [starsArray,setStarsArray] = useState([])
 
   useEffect(()=> {
+    // go through all reviews in prismic and check if they pertain to this item
+    // if they do then push them to an array and set that array as the thisProductReviews state
     let reviewsArray = []
+    let numberOfStars = []
+
     reviews && reviews.results.forEach(review => {
-      console.log(product.id)
       if (product && product.id === review.data.link.id){
         reviewsArray.push(review)
       }
-      setThisProductReviews(reviewsArray)
     });
 
-  },[reviews])
+    setThisProductReviews(reviewsArray)
 
-  const [reviewScoreAverage, setReviewScoreAverage ] = useState(0)
+    // add up the ratings from all reviews and divide by number of reviews
+    let averageRating = ( reviewsArray.reduce((a,b) => a + b.data.score,0) ) / 2
+    console.log(averageRating)
+
+     // get the state of the average of the ratings and render that as an array of star objects
+    // in the starsArray state
+      for (let i = 0; i < 5; i++) {
+        if (i < averageRating){
+          numberOfStars.push(<FontAwesomeIcon icon={faStar} className={'review-star'} />)
+        } else {
+          numberOfStars.push(<FontAwesomeIcon icon={faStarHollow} className={'review-star'} />)
+        }
+      }
+
+    setStarsArray(numberOfStars,product,state)
+    console.log(error)
+
+  },[reviews,state,product])
 
   const [cartQtyState,setCartQtyState] = useState(null)
   const { shoppingCartState,setShoppingCartState } = useContext(ShoppingCartContext)
@@ -95,6 +118,14 @@ function ProductPage() {
                         </span>
                     </span>
               }
+              <span>
+                {/* render number of starts based on the score in prismic */}
+                {thisProductReviews.length > 0 ?<>{
+                  starsArray.map((star,index) => <span key={index}>{star}</span>)
+                }</> : ""} &nbsp;&nbsp;
+                {thisProductReviews.length} ratings
+              </span>
+                {/* add to cart section */}
                 <Container style={{paddingTop:'20px',width:'inherit',display:'flex',justifyContent:'center',alignItems:'center'}}>
                   <Row style={{width:'90%'}}>
                     <Col xl={4} style={{display:'flex',justifyContent:'center',alignItems:'center',marginTop:'20px',marginBottom:'20px'}}>
@@ -137,7 +168,7 @@ function ProductPage() {
               <span style={{fontWeight:'700',marginRight:'auto'}}>Reviews</span>
             
               {/* If there are no reviews inside of the set, display a message. */}
-              {thisProductReviews.size !== 0 ?
+              {thisProductReviews.length !== 0 ?
                 <>{thisProductReviews && Array.from(thisProductReviews).map((review) => {
                 // console.log(Array.from(thisProductReviews))
                 {
@@ -147,7 +178,7 @@ function ProductPage() {
                   key={review.id}
                    />
                 }})
-              }</> : <>There are no reviews for this item yet.</>}
+              }</> : <span className="text-secondary">There are no reviews for this item yet.</span>}
 
             </div>
       </Col>

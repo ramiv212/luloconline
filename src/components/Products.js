@@ -96,7 +96,6 @@ function Products() {
 
                 {/* render out all of the products */}
                 {products && Object.keys(products.results).map((index => {
-                    console.log(state)
                     if (state === 'loading') return <Loading />
                     return <Product data={products.results[index].data} id={products.results[index].id} width={275} key={products.results[index].id} />
             }))}

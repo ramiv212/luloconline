@@ -14,7 +14,6 @@ function Review( { state,review } ) {
     // if the index of the iteration is less than the score push solid stars. Else push solid stars.
     useEffect(() => {
       let numberOfStars = []
-      console.log(review.data.score)
       for (let i = 0; i < 5; i++) {
         if (i < review.data.score){
           numberOfStars.push(<FontAwesomeIcon icon={faStar} className={'review-star'} />)
