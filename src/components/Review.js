@@ -1,12 +1,11 @@
 import { React,useEffect,useState } from 'react'
-import { PrismicRichText } from '@prismicio/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { faStar as faStarHollow } from '@fortawesome/free-regular-svg-icons'
 
 
 
-function Review( { state,review } ) {
+function Review( { review } ) {
 
   const [starsArray,setStarsArray] = useState([])
 
@@ -15,7 +14,7 @@ function Review( { state,review } ) {
     useEffect(() => {
       let numberOfStars = []
       for (let i = 0; i < 5; i++) {
-        if (i < review.data.score){
+        if (i < review.rating){
           numberOfStars.push(<FontAwesomeIcon icon={faStar} className={'review-star'} />)
         } else {
           numberOfStars.push(<FontAwesomeIcon icon={faStarHollow} className={'review-star'} />)
@@ -26,10 +25,10 @@ function Review( { state,review } ) {
 
   return (
     <div style={{width:'100%',paddingTop:'4px',paddingBottom:'4px'}}>
-        {state === 'loaded' && <>
+        {<>
         <div style={{display:'flex', justifyContent:'start'}}>
 
-                {review.data.author}&nbsp;
+                {review.name}&nbsp;
 
                 {/* render number of starts based on the score in prismic */}
                 {
@@ -41,17 +40,11 @@ function Review( { state,review } ) {
         <div style={{fontSize:'75%'}} className={'text-secondary'}>
             Reviewed on&nbsp;
              {
-                new Date(review && review.first_publication_date).toDateString()
+                new Date(review.date).toDateString()
              }
         </div>
 
-        {/* {console.log(review)} */}
-        <PrismicRichText
-            field={review.data.reviewtext}
-            components={{
-                paragraph: ({ children }) => <blockquote>{children}</blockquote>,
-        }}
-/>
+        {review.review}
     </>}
     </div>
   )

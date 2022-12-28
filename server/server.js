@@ -6,6 +6,8 @@ import fetch from 'node-fetch'
 import * as dotenv from 'dotenv';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
+import * as fs from 'fs';
+import e from "express";
 
 // start dotenv to use environment variables
 dotenv.config();
@@ -172,8 +174,69 @@ const init = async () => {
     });
       
 
-init()
+    function writeToReviewFile(object) {
+        const jsonString = JSON.stringify(object)
+        fs.writeFile('./reviews.json',jsonString,err => {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log('Successfuly updated reviews')
+            }
+        })
+    }
 
+    app.post("/api/reviews/", cors(corsOptions), (req,res) => {
+
+        const reviewsFile = fs.readFileSync('./reviews.json');
+        const reviewsFileArray = JSON.parse(reviewsFile)
+
+        const newReviewObject = req.body
+
+        console.log(newReviewObject)
+        
+            if(reviewsFileArray.find(element => newReviewObject.productID === Object.keys(element)[0])) {
+                // if object has been reviewed, add the review to the array inside of the object that already exists inside of the file
+                let objectToUpdate = reviewsFileArray.find(element => newReviewObject.productID === Object.keys(element)[0])[newReviewObject.productID]
+                const reviewObjectToAdd = {
+                    date: newReviewObject.date,
+                    title: newReviewObject.title,
+                    name: newReviewObject.name,
+                    rating: newReviewObject.rating,
+                    review: newReviewObject.review,
+                }
+                objectToUpdate.push(reviewObjectToAdd)
+                console.log(reviewsFileArray)
+                writeToReviewFile(reviewsFileArray)
+
+            } else {
+                // if product has not been reviewed yet, add review to the json file inside of an array.
+                const reviewObjectToAdd = {}
+                reviewObjectToAdd[newReviewObject.productID] = [{
+                    date: newReviewObject.date,
+                    title: newReviewObject.title,
+                    name: newReviewObject.name,
+                    rating: newReviewObject.rating,
+                    review: newReviewObject.review,
+                }]
+                const newReviewsFileArray = [...reviewsFileArray,reviewObjectToAdd]
+                writeToReviewFile(newReviewsFileArray)
+            }
+    })
+
+    app.get("/api/reviews/:id", cors(corsOptions), (req,res) => {
+        const productToGet = req.params.id
+        // console.log(productToGet)
+
+        const reviewsFile = fs.readFileSync('./reviews.json');
+        const reviewsFileArray = JSON.parse(reviewsFile)
+
+        res.json(
+            reviewsFileArray.find(element => productToGet === Object.keys(element)[0])
+        )
+    })
+
+
+init()
 
 app.listen(process.env.REACT_APP_SERVER_PORT, () => console.log(`Node server listening on port ${process.env.REACT_APP_SERVER_PORT}!`));
 
