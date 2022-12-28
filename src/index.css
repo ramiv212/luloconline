@@ -234,7 +234,6 @@ code {
 .homepage-info-squares {
   font-family: 'Dosis', sans-serif !important;
   font-weight: 300;
-  font-size: 24px;
   display: flex; 
   justify-content: center; 
   align-items: center;
@@ -468,10 +467,15 @@ code {
 
   #header-text {
     padding: 20px;
+    width: 175px;
   }
 
   #header-subtext {
     display: none;
+  }
+
+  .homepage-info-squares {
+    font-size: 100%;
   }
 
   #footer {
@@ -527,7 +531,7 @@ code {
 
  @media (min-width: 767.98px) { 
 
-  #hero-image-banner {
+  #hero-banner-image {
     height: calc(100vh - 250px);
   }
 
@@ -537,6 +541,10 @@ code {
 
   .product-filter-title {
     right: calc(265px / 2);
+  }
+
+  .homepage-info-squares {
+    font-size: 140%;
   }
 
   #qty-bar {
