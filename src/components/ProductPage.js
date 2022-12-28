@@ -32,6 +32,7 @@ function ProductPage() {
       return response;
     }
     
+    try {
     // query the json file on the server for the reviews for this product
     fetch(`${process.env.REACT_APP_SERVER_URL}/api/reviews/${id}`, {
       method: 'GET',
@@ -44,8 +45,6 @@ function ProductPage() {
     .then((data)=> {
       // add up the ratings from all reviews and divide by number of reviews
       const productReviews = data[id]
-
-      console.log(productReviews)
       
       let averageRating = Math.floor(( productReviews.reduce((a,b) => a + parseInt(b.rating),0) ) / productReviews.length)
 
@@ -66,9 +65,11 @@ function ProductPage() {
     .catch((error) => {
       console.error(error)
     })
+  } catch (error) {
+    console.log(error.message)
+  }
 
-
-  },[product,id])
+  },[])
 
   const [cartQtyState,setCartQtyState] = useState(null)
   const { shoppingCartState,setShoppingCartState } = useContext(ShoppingCartContext)

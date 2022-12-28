@@ -2,6 +2,7 @@ import { React, useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import useLocalStorage from "../useLocalStorage";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function Addreview({ productID }) {
 
@@ -9,6 +10,7 @@ function Addreview({ productID }) {
   const [nameState, setNameState] = useState('')
   const [ratingState, setRatingState] = useState(5)
   const [reviewState, setReviewState] = useState('')
+  const [recaptchaPassed,setRecaptchaPassed] = useState(false)
 
   const [reviewWasSent,setReviewWasSent] = useLocalStorage(productID,false)
 
@@ -22,18 +24,12 @@ function Addreview({ productID }) {
         },
         body: JSON.stringify(body),
       })
-      .then((response) => response.json())
-      .then((data)=> {
-        console.log(data)
-      })
       .catch((error) => {
-        // console.error(error)
+        console.log(error.name)
       })
-    } catch (error) {
-      console.log(error)
+    } catch(error) {
+      console.log(error.message)
     }
-
-
   }
 
 
@@ -56,7 +52,6 @@ function Addreview({ productID }) {
       <Form.Select 
         aria-label="Default select example" 
         onChange={(e) => {
-          console.log(e.target.value)
           setRatingState(e.target.value)
         }}>
         <option disabled={true}>Select a rating</option>
@@ -71,16 +66,23 @@ function Addreview({ productID }) {
         <Form.Label>Review <span className='required-text'>*Required</span></Form.Label>
         <Form.Control as="textarea" rows={3} />
       </Form.Group>
+
+      <ReCAPTCHA
+      style={{marginBottom:'20px'}}
+      sitekey={process.env.REACT_APP_CAPTCHA_KEY}
+        onChange={() => setRecaptchaPassed(true)}
+      />
+
       <Button
       disabled={
         titleState === "" ||
         nameState === "" ||
         ratingState === "Select a rating" || 
-        reviewState === ""
+        reviewState === "" ||
+        !recaptchaPassed
       }
       className='product-card-button w-100'
       variant="primary" onClick={() => {
-        console.log(ratingState);
         sendReviewRequest({
           date: Date.now(),
           productID: productID,
@@ -91,7 +93,6 @@ function Addreview({ productID }) {
         })
         const localStorageObject = {}
         localStorageObject[productID] = true
-        console.log(localStorageObject)
         setReviewWasSent(true)
       }} >
         Submit

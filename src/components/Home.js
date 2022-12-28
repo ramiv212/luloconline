@@ -33,11 +33,11 @@ function Home() {
   return (
     <div style={{ display: "flex", flexDirection: "column", width: "100%" }} id='category-page'>
       <div
+        id="hero-banner-image"
         style={{
           backgroundImage: `url("${
             document && document.data.homepagebanner.url
           }")`,
-          height: "calc(100vh - 250px)",
           backgroundSize: "cover",
           backgroundPosition: "100% 50%",
           width: "100%",
@@ -58,8 +58,10 @@ function Home() {
             
             <div style={{ width: "50%" }} id="header-text">
               <h1 id="header-text">Professional Skin Care Products +</h1>
-              Good health is not just the absence of disease or illness, it is a
-              state of complete physical, mental and social well-being.
+              <span id="header-subtext">
+                Good health is not just the absence of disease or illness, it is a
+                state of complete physical, mental and social well-being.
+              </span>
             </div>
           </div>
         </div>
@@ -78,7 +80,7 @@ function Home() {
         
           <Container fluid style={{width:'90%'}}>
             <Row>
-              <Col md={3} xs={6} style={{textAlign:'center', cursor:'pointer'}} onClick={() => {routeChange(document && document.data.firstsquarelink)}}>
+              <Col md={3} xs={12} style={{textAlign:'center', cursor:'pointer'}} className="homepage-category-squares" onClick={() => {routeChange(document && document.data.firstsquarelink)}}>
                 <div>
                   {document && document.data.firstsquaretext[0].text}
                 </div>
@@ -91,7 +93,7 @@ function Home() {
 
               </Col>
 
-              <Col md={3} xs={6} style={{textAlign:'center', cursor:'pointer'}} onClick={() => {routeChange(document && document.data.secondsquarelink)}}>
+              <Col md={3} xs={12} style={{textAlign:'center', cursor:'pointer'}} className="homepage-category-squares" onClick={() => {routeChange(document && document.data.secondsquarelink)}}>
                 <div>
                   {document && document.data.secondsquaretext[0].text}
                 </div>
@@ -105,7 +107,7 @@ function Home() {
                 </div>
               </Col>
 
-              <Col md={3} xs={6} style={{textAlign:'center', cursor:'pointer'}} onClick={() => {routeChange(document && document.data.thirdsquarelink)}}>
+              <Col md={3} xs={12} style={{textAlign:'center', cursor:'pointer'}} className="homepage-category-squares" onClick={() => {routeChange(document && document.data.thirdsquarelink)}}>
                 <div>
                   {document && document.data.thirdsquaretext[0].text}
                 </div>
@@ -118,7 +120,7 @@ function Home() {
                 
               </Col>
 
-              <Col md={3} xs={6} style={{textAlign:'center', cursor:'pointer'}} onClick={() => {routeChange(document && document.data.fourthsquarelink)}}>
+              <Col md={3} xs={12} style={{textAlign:'center', cursor:'pointer'}} className="homepage-category-squares" onClick={() => {routeChange(document && document.data.fourthsquarelink)}}>
                 <div>
                   {document && document.data.fourthsquaretext[0].text}
                 </div>

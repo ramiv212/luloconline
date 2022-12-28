@@ -466,6 +466,14 @@ code {
     display: none;
   }
 
+  #header-text {
+    padding: 20px;
+  }
+
+  #header-subtext {
+    display: none;
+  }
+
   #footer {
     display: none !important;
   }
@@ -509,9 +517,19 @@ code {
     display: none;
   }
 
+  .homepage-category-squares {
+    padding: 15px;
+    width: 75% !important;
+    margin: auto;
+  }
+
  }
 
  @media (min-width: 767.98px) { 
+
+  #hero-image-banner {
+    height: calc(100vh - 250px);
+  }
 
   .product-card {
     margin: 30px;
@@ -551,7 +569,6 @@ code {
   #write-review-mobile {
     display: none;
   }
-
 }
 
 
