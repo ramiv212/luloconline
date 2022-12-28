@@ -8,6 +8,7 @@ import Product from "./Product";
 import { Container,Row,Col } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBookOpen,faBagShopping,faHeart } from '@fortawesome/free-solid-svg-icons'
+import Loading from './Loading'
 
 function Home() {
 

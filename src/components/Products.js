@@ -1,12 +1,13 @@
 import { React,useContext,useState } from 'react';
 import '../index.css';
 import Product from './Product';
-import { usePrismicDocumentsByType ,usePrismicDocuments} from '@prismicio/react';
+import { usePrismicDocumentsByType} from '@prismicio/react';
 import * as prismic from '@prismicio/client'
 import { ProductFilterContext } from '../ProductFilterContext';
 import Sidebar from './Sidebar';
 import { Container, Row } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
+import Loading from './Loading';
 
 function Products() { 
 
@@ -92,7 +93,11 @@ function Products() {
                 <h1 className='product-filter-title'>{id ? id.toUpperCase() : ""}{sale ? 'On Sale' : ""}</h1>
                 </Row>: ''}
                 <Row style={{marginTop:'46px'}}>
+
+                {/* render out all of the products */}
                 {products && Object.keys(products.results).map((index => {
+                    console.log(state)
+                    if (state === 'loading') return <Loading />
                     return <Product data={products.results[index].data} id={products.results[index].id} width={275} key={products.results[index].id} />
             }))}
                 </Row>

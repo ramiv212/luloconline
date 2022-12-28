@@ -1,14 +1,36 @@
 import { React, useState, useContext, useEffect } from "react";
-import { usePrismicDocumentByID,PrismicRichText } from "@prismicio/react";
+import { usePrismicDocumentByID,PrismicRichText,usePrismicDocumentsByType } from "@prismicio/react";
 import { Container,Row,Col,Image } from 'react-bootstrap'
 import { useParams } from "react-router-dom";
 import { usFormatter } from '../helperFunctions'
 import { addToCart,returnCartQtyFromID } from '../helperFunctions'
 import { ShoppingCartContext } from '../ShoppingCartContext';
+import Review from "./Review";
 
 function ProductPage() {
   const { id } = useParams("id");
   const [product] = usePrismicDocumentByID(id);
+
+  const [reviews, { state, error }] = usePrismicDocumentsByType('review',{
+    // predicates: returnPredicates(productFilter),
+    // orderings: orderings
+  });
+
+  const [thisProductReviews, setThisProductReviews] = useState([])
+
+  useEffect(()=> {
+    let reviewsArray = []
+    reviews && reviews.results.forEach(review => {
+      console.log(product.id)
+      if (product && product.id === review.data.link.id){
+        reviewsArray.push(review)
+      }
+      setThisProductReviews(reviewsArray)
+    });
+
+  },[reviews])
+
+  const [reviewScoreAverage, setReviewScoreAverage ] = useState(0)
 
   const [cartQtyState,setCartQtyState] = useState(null)
   const { shoppingCartState,setShoppingCartState } = useContext(ShoppingCartContext)
@@ -17,9 +39,9 @@ function ProductPage() {
 
   useEffect(() => {
     shoppingCartState && setCartQtyState(returnCartQtyFromID(shoppingCartState,id))
-    console.log([product && product.data])
   }, [id,shoppingCartState])
 
+  
 
   return (
     <Container fluid style={{width:'90%',paddingTop:'25px',paddingBottom:'25px'}}>
@@ -112,6 +134,21 @@ function ProductPage() {
               <div style={{paddingTop:'20px',paddingBottom:'20px', width:'80%'}}>
                 {product && <PrismicRichText field={product.data.description} />}
               </div>
+              <span style={{fontWeight:'700',marginRight:'auto'}}>Reviews</span>
+            
+              {/* If there are no reviews inside of the set, display a message. */}
+              {thisProductReviews.size !== 0 ?
+                <>{thisProductReviews && Array.from(thisProductReviews).map((review) => {
+                // console.log(Array.from(thisProductReviews))
+                {
+                return <Review style={{width:'100%'}}
+                  state={state}
+                  review={review}
+                  key={review.id}
+                   />
+                }})
+              }</> : <>There are no reviews for this item yet.</>}
+
             </div>
       </Col>
     </Row>
