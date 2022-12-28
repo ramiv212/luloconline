@@ -230,9 +230,13 @@ const init = async () => {
         const reviewsFile = fs.readFileSync('./reviews.json');
         const reviewsFileArray = JSON.parse(reviewsFile)
 
-        res.json(
-            reviewsFileArray.find(element => productToGet === Object.keys(element)[0])
-        )
+        const itemToSend =  reviewsFileArray.find(element => productToGet === Object.keys(element)[0])
+            if (!itemToSend) { res.status(400) }
+            else {
+            res.json(
+                itemToSend
+            )
+        }
     })
 
 

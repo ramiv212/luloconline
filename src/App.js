@@ -27,6 +27,7 @@ const logo = require("./images/LuloC_logo_png.png");
 // add hover animation to items like cart, checkboxes,etc
 // reviews?
 // if product or filter don't exist, don't do anything
+// validation for review form
 
 function App() {
 

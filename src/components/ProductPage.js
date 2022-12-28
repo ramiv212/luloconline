@@ -1,6 +1,6 @@
 import { React, useState, useContext, useEffect } from "react";
 import { usePrismicDocumentByID,PrismicRichText } from "@prismicio/react";
-import { Container,Row,Col,Image } from 'react-bootstrap'
+import { Container,Row,Col,Image,Button } from 'react-bootstrap'
 import { useParams } from "react-router-dom";
 import { usFormatter } from '../helperFunctions'
 import { addToCart,returnCartQtyFromID } from '../helperFunctions'
@@ -10,6 +10,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { faStar as faStarHollow } from '@fortawesome/free-regular-svg-icons'
 import Review from "./Review";
 import Addreview from "./Addreview";
+import { Collapse } from 'react-collapse';
 
 function ProductPage() {
   const { id } = useParams("id");
@@ -18,9 +19,18 @@ function ProductPage() {
   const [thisProductReviews, setThisProductReviews] = useState([])
   const [starsArray,setStarsArray] = useState([])
 
+  const [addReviewIsOpened,setAddReviewIsOpened] = useState(false)
+
   useEffect(()=> {
 
     let numberOfStars = []
+
+    function handleErrors(response) {
+      if (!response.ok) {
+          console.log(response.statusText);
+      }
+      return response;
+    }
     
     // query the json file on the server for the reviews for this product
     fetch(`${process.env.REACT_APP_SERVER_URL}/api/reviews/${id}`, {
@@ -29,14 +39,16 @@ function ProductPage() {
         'Content-Type': 'application/json',
       },
     })
+    .then(handleErrors)
     .then((response) => response.json())
     .then((data)=> {
       // add up the ratings from all reviews and divide by number of reviews
-      console.log(data)
       const productReviews = data[id]
+
+      console.log(productReviews)
+      
       let averageRating = Math.floor(( productReviews.reduce((a,b) => a + parseInt(b.rating),0) ) / productReviews.length)
 
-      console.log(averageRating)
       // get the state of the average of the ratings and render that as an array of star objects
     // in the starsArray state
     for (let i = 0; i < 5; i++) {
@@ -80,13 +92,33 @@ function ProductPage() {
             alt={product && product.data.name[0].text}
             fluid
           />
+          
+          <div id="write-review-desktop">
+            <div style={{
+              display:'flex',
+              alignItems:'center',
+              justifyContent:'center',
+              flexDirection:'column',
+              marginTop:'50px'
+            }}>
+              <Button style={{marginBottom:'20px', width:'60%'}}
+                      type="button"
+                      className='product-card-button'
+                      onClick={() => setAddReviewIsOpened(!addReviewIsOpened)}>Click here to write a review</Button>
+
+              <Collapse isOpened={addReviewIsOpened} theme={{collapse: 'ReactCollapse--collapse'}}>
+                <Addreview productID={id} id="add-review" className="collapse in" />
+              </Collapse>
+            </div>
+          </div>
+
         </div>
       </Col>
 
-      <Col lg={6} style={{padding:'25px',display:'flex',justifyContent:'center',alignItems:'center'}}>
+      <Col lg={6} style={{padding:'25px',display:'flex'}}>
 
         {/* product title */}
-            <div style={{width:'100%', margin:'auto', display: "flex", flexDirection: "column", alignItems:'center',justifyContent:'center'}}>
+            <div style={{width:'100%',display: "flex", flexDirection: "column", alignItems:'center',justifyContent:'start'}}>
               <h2>{product && product.data.name[0].text}</h2>
               {product && product.data["sale-price"] ? <span style={{display:'flex', alignItems:'center',justifyContent:'center'}}>  
                 <span
@@ -185,8 +217,27 @@ function ProductPage() {
             </div>
       </Col>
     </Row>
+
     <Row>
-      <Addreview productID={id} />
+      <Col>
+        <div id="write-review-mobile">
+            <div style={{
+              display:'flex',
+              alignItems:'center',
+              justifyContent:'center',
+              flexDirection:'column',
+            }}>
+              <Button style={{marginBottom:'20px', width:'60%'}}
+                      type="button"
+                      className='product-card-button'
+                      onClick={() => setAddReviewIsOpened(!addReviewIsOpened)}>Click here to write a review</Button>
+
+              <Collapse isOpened={addReviewIsOpened} theme={{collapse: 'ReactCollapse--collapse'}}>
+                <Addreview productID={id} id="add-review" className="collapse in" />
+              </Collapse>
+            </div>
+          </div>
+      </Col>
     </Row>
     </Container>
   );
