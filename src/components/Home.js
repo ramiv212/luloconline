@@ -152,9 +152,9 @@ function Home() {
                 <div>Learn</div>
               </Col>
 
-              <Col className="homepage-info-squares" onClick={() => {routeChange('/vision')}}>
+              <Col className="homepage-info-squares" onClick={() => {routeChange('/mission')}}>
                 <FontAwesomeIcon icon={faHeart} style={{width:'40px', height:'40px'}} />
-                <div>Our Vision</div>
+                <div>Our Mission</div>
               </Col>
 
               <Col className="homepage-info-squares" onClick={() => {routeChange('/contact')}}>
