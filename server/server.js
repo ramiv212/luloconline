@@ -9,6 +9,15 @@ import nodemailer from 'nodemailer';
 import * as fs from 'fs';
 import e from "express";
 
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+import * as url from 'url';
+    const __filename = url.fileURLToPath(import.meta.url);
+    const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+
+const path = require('path');
+
 // start dotenv to use environment variables
 dotenv.config();
 
@@ -53,6 +62,9 @@ const transporter = nodemailer.createTransport({
 const app = express();
 app.use(express.json());
 app.use(cors())
+// Have Node serve the files for our built React app
+app.use(express.static(path.resolve(__dirname, '../build')));
+
 
 const corsOptions = {
     origin: [process.env.REACT_APP_FRONTEND_URL,'http://127.0.0.1'],
@@ -239,6 +251,9 @@ const init = async () => {
         }
     })
 
+    app.get("/", (req, res) => {
+        res.sendFile(path.join(__dirname, "public", "index.html"));
+       });
 
 init()
 
