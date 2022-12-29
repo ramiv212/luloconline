@@ -17,7 +17,7 @@ function Addreview({ productID }) {
   function sendReviewRequest(body) {
 
     try {
-      fetch(`${process.env.REACT_APP_SERVER_URL}/api/reviews/`, {
+      fetch(`/api/reviews/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

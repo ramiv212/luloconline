@@ -67,7 +67,7 @@ app.use(express.static(path.resolve(__dirname, '../build')));
 
 
 const corsOptions = {
-    origin: [process.env.REACT_APP_FRONTEND_URL,'http://127.0.0.1'],
+    origin: ['/'],
     credentials:true,
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
     methods: ['GET', 'PUT', 'POST']
@@ -160,8 +160,8 @@ const init = async () => {
                 automatic_tax: {
                     enabled: true,
                   },
-                success_url: `${process.env.REACT_APP_FRONTEND_URL}/success`,
-                cancel_url: `${process.env.REACT_APP_FRONTEND_URL}/products`,
+                success_url: `/success`,
+                cancel_url: `/products`,
             })
 
             console.log(returnShippingOptions(items,productsObjectForStripe))
