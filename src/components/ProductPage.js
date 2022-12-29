@@ -34,7 +34,7 @@ function ProductPage() {
     
     try {
     // query the json file on the server for the reviews for this product
-    fetch(`/api/reviews/${id}`, {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/api/reviews/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

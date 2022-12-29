@@ -30,7 +30,7 @@ useEffect(() => {
 
  function sendContactFormRequest() {
 
-    fetch(`/send-contact-form`, {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/send-contact-form`, {
         method: 'POST',
         headers: {
             "Content-Type": 'application/json',
