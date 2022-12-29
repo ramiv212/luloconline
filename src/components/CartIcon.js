@@ -19,7 +19,8 @@ function CartIcon({shoppingCartState,appOverlayState,setAppOverlayState,navBar})
                 `${ navBar ? 'cartQtyNav' : 'cartQty' }` 
             } >
               <span style={{width:'100%',display:'flex', justifyContent:'center',alignItems:'center',paddingBottom:'1px',paddingLeft:'0px'}}>
-              {shoppingCartState.length}
+                {/* reduce over all item in carts to get sum of qty */}
+              {shoppingCartState.reduce((a,b) => a + parseInt(b.qty), 0)}
               </span>
             </span> : ""}
     </span>

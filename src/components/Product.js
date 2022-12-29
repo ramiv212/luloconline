@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { ShoppingCartContext } from '../ShoppingCartContext';
-import { addToCart,returnCartQtyFromID } from '../helperFunctions'
+import { addToCart,returnCartQtyFromID,usFormatter } from '../helperFunctions'
 
 function Product( {data,id,width} ) {
 
@@ -62,13 +62,13 @@ function Product( {data,id,width} ) {
 
               <Card.Text className='product-prices'><span>
 
-                  {data['original-price'] && data['sale-price']  ? <> <span style={{textDecoration: 'line-through'}}>$ {data['original-price']}</span> | </> : 
-                  <span style={{fontWeight: '600',fontSize: '110%'}}>${data['original-price']}</span>
+                  {data['original-price'] && data['sale-price']  ? <> <span style={{textDecoration: 'line-through'}}>{usFormatter.format(data['original-price'])}</span> | </> : 
+                  <span style={{fontWeight: '600',fontSize: '110%'}}>{usFormatter.format(data['original-price'])}</span>
                   }
 
                   </span>
                   <span style={{fontWeight: '600',fontSize: '110%'}}>
-                      { data['sale-price'] !== null ? '$' + data['sale-price'] : "" }
+                      { data['sale-price'] !== null ? usFormatter.format(data['sale-price']) : "" }
                   </span>
                   </Card.Text>
                   

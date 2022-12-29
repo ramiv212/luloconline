@@ -1,11 +1,18 @@
-import { React} from 'react'
+import { React,useContext,useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
 import { Button } from 'react-bootstrap'
+import { ShoppingCartContext } from '../ShoppingCartContext';
 
 function Success() {
     
   const navigate = useNavigate()
 
+  const { setShoppingCartState } = useContext(ShoppingCartContext)
+
+  useEffect(() => {
+    setShoppingCartState([])
+  },[])
+    
   return (
     <div style={{display:'flex', alignItems:'center', justifyContent:'center',textAlign:'center',width:'90%',margin:'auto', height:'calc(100vh - 255px)',flexDirection:'column', gap:'30px'}}>
 
