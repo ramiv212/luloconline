@@ -17,9 +17,9 @@ function Topbar() {
                 <div>| &nbsp;&nbsp;&nbsp;Save up to 20%, 30%, 40% + <Link style={{color:'black'}} to={'/products/all/sale'} >see details</Link> </div>
         </div>
         
+        <div style={{display:'flex',gap:'15px',flexDirection:'rows',width:'30%',alignItems:'center', justifyContent:'right',marginRight:'30px'}}>
         {/* IG Logo */}
-        {/* <div style={{display:'flex',gap:'15px',flexDirection:'rows',width:'30%',alignItems:'center', justifyContent:'right',marginRight:'30px'}}>
-          <img src={instagram} style={{height:'23px', float:"right"}}/> */}
+          {/* <img src={instagram} style={{height:'23px', float:"right"}}/> */}
 
           {/* Cart Icon */}
           <CartIcon shoppingCartState={shoppingCartState} appOverlayState={appOverlayState} setAppOverlayState={setAppOverlayState} navBar={false} />
