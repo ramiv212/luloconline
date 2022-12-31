@@ -22,8 +22,7 @@ function Navigation() {
     <div style={{width:'100%', display:'flex', justifyContent:'center', alignItems:'center'}}>
     <Navbar expand="lg">
       <Container>
-        <Navbar.Brand href="#home"></Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" style={{margin:'auto'}} />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Link className='nav-link' to='/'>Home</Link>

@@ -228,7 +228,7 @@ function ProductPage() {
               justifyContent:'center',
               flexDirection:'column',
             }}>
-              <Button style={{marginBottom:'20px', width:'60%'}}
+              <Button style={{marginBottom:'20px', width:'60%',height:'40px'}}
                       type="button"
                       className='product-card-button'
                       onClick={() => setAddReviewIsOpened(!addReviewIsOpened)}>Click here to write a review</Button>
