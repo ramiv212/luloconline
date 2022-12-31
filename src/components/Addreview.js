@@ -6,7 +6,6 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 function Addreview({ productID }) {
 
-  const [titleState,setTitleState] = useState('')
   const [nameState, setNameState] = useState('')
   const [ratingState, setRatingState] = useState(5)
   const [reviewState, setReviewState] = useState('')
@@ -24,6 +23,11 @@ function Addreview({ productID }) {
         },
         body: JSON.stringify(body),
       })
+      .then(() => {
+        const localStorageObject = {}
+        localStorageObject[productID] = true
+        setReviewWasSent(true)
+      })
       .catch((error) => {
         console.log(error.name)
       })
@@ -40,10 +44,6 @@ function Addreview({ productID }) {
       style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column'}}
       
       >
-      <Form.Group className="mb-3 w-100" controlId="exampleForm.ControlInput1" onChange={(e) => {setTitleState(e.target.value)} }>
-        <Form.Label>Title <span className='required-text'>*Required</span></Form.Label>
-        <Form.Control type="text"/>
-      </Form.Group>
       <Form.Group className="mb-3 w-100" controlId="exampleForm.ControlInput1" onChange={(e) => {setNameState(e.target.value)} }>
         <Form.Label>Name <span className='required-text'>*Required</span></Form.Label>
         <Form.Control type="text"/>
@@ -75,7 +75,6 @@ function Addreview({ productID }) {
 
       <Button
       disabled={
-        titleState === "" ||
         nameState === "" ||
         ratingState === "Select a rating" || 
         reviewState === "" ||
@@ -86,19 +85,16 @@ function Addreview({ productID }) {
         sendReviewRequest({
           date: Date.now(),
           productID: productID,
-          title: titleState,
           name: nameState,
           rating: parseInt(ratingState),
           review: reviewState,
         })
-        const localStorageObject = {}
-        localStorageObject[productID] = true
-        setReviewWasSent(true)
       }} >
         Submit
       </Button>
     </Form>
-      : <div style={{textAlign:'center',margin:'auto',width:'100%'}}>Thank you for your review!</div>}
+      : <div style={{textAlign:'center',margin:'auto',width:'100%'}}>
+        {reviewWasSent ? <>Thank you for your review!</> : <>There was an error sending your review. Please try again later.</>}</div>}
     </div>
   )
 }

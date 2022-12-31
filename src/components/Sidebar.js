@@ -25,7 +25,6 @@ function Sidebar( { filter,sale } ) {
   // are rendered in the products component. On checkbox change, it will either add an item or remove it if it exists.
   function chekboxFunction(checkboxID,filter) {
     let lowerCaseID = checkboxID.toLowerCase()
-    console.log(filter)
     let newFilter = [...filter]
     // if the item is found in the array
     if (newFilter.includes(lowerCaseID)) {
@@ -71,7 +70,6 @@ function Sidebar( { filter,sale } ) {
         {/* this checkbox will enable filtering by sale. It will change the sale object of the productFilter context */}
         {!sale ? <span id='sale-checkbox-span'>
           <input type={'checkbox'} className="css-checkbox" id='sale-checkbox' onChange={(e) => {
-            console.log(e.target.checked)
             if (e.target.checked) {
               setProductFilter({
                 filter: productFilter.filter,

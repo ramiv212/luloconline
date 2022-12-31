@@ -74,6 +74,57 @@ const corsOptions = {
   }
 
 
+
+// DATABASE STUFF
+
+const { Sequelize,DataTypes } = require('sequelize');
+
+const sequelize = new Sequelize(process.env.REACT_APP_MYSQL_CONNECTION) // Example for postgres
+
+try {
+    await sequelize.authenticate();
+    console.log('Connection to DB has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+
+
+const Review = sequelize.define('Review', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    productID: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW
+    },
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    rating: {
+        type: DataTypes.SMALLINT,
+        allowNull: false
+    },
+    review: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }
+})
+
+    // await sequelize.sync({ alter: true })
+
+// END DATABASE STUFF
+
+
+
+
 // Prismic Stuff
 const repoName = 'luloconline'
 const endpoint = prismic.getEndpoint(repoName)
@@ -198,64 +249,44 @@ const init = async () => {
     }
 
     app.post("/api/reviews/", cors(corsOptions), (req,res) => {
-
-        const reviewsFile = fs.readFileSync('./reviews.json');
-        const reviewsFileArray = JSON.parse(reviewsFile)
-
-        const newReviewObject = req.body
-
-        console.log(newReviewObject)
         
-            if(reviewsFileArray.find(element => newReviewObject.productID === Object.keys(element)[0])) {
-                // if object has been reviewed, add the review to the array inside of the object that already exists inside of the file
-                let objectToUpdate = reviewsFileArray.find(element => newReviewObject.productID === Object.keys(element)[0])[newReviewObject.productID]
-                const reviewObjectToAdd = {
-                    date: newReviewObject.date,
-                    title: newReviewObject.title,
-                    name: newReviewObject.name,
-                    rating: newReviewObject.rating,
-                    review: newReviewObject.review,
-                }
-                objectToUpdate.push(reviewObjectToAdd)
-                console.log(reviewsFileArray)
-                writeToReviewFile(reviewsFileArray)
+        try {
+            const newReview = Review.create({
+                productID: req.body.productID,
+                name: req.body.name,
+                rating: req.body.rating,
+                review: req.body.review
+            })
+            res.status(200).json({message:'Thank you for your review!'})
 
-            } else {
-                // if product has not been reviewed yet, add review to the json file inside of an array.
-                const reviewObjectToAdd = {}
-                reviewObjectToAdd[newReviewObject.productID] = [{
-                    date: newReviewObject.date,
-                    title: newReviewObject.title,
-                    name: newReviewObject.name,
-                    rating: newReviewObject.rating,
-                    review: newReviewObject.review,
-                }]
-                const newReviewsFileArray = [...reviewsFileArray,reviewObjectToAdd]
-                writeToReviewFile(newReviewsFileArray)
-            }
+        } catch (error) {
+            console.log("Error!!!")
+            res.status(500).send('Unable to create review. Please try again later.')
+        }   
+        
     })
 
-    app.get("/api/reviews/:id", cors(corsOptions), (req,res) => {
+    app.get("/api/reviews/:id", cors(corsOptions), async (req,res) => {
         const productToGet = req.params.id
-        // console.log(productToGet)
+        console.log(productToGet)
 
-        const reviewsFile = fs.readFileSync('./reviews.json');
-        const reviewsFileArray = JSON.parse(reviewsFile)
-
-        const itemToSend =  reviewsFileArray.find(element => productToGet === Object.keys(element)[0])
-            if (!itemToSend) { res.status(400) }
-            else {
-            res.json(
-                itemToSend
-            )
-        }
+        const reviews = await Review.findAll({
+            where: {
+                productID: productToGet
+            }
+          });
+          
+        res.send(reviews)
     })
 
-    app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname, "../build", "index.html"));
-       });
 
 init()
+
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../build", "index.html"));
+   });
+
 
 app.listen(process.env.REACT_APP_SERVER_PORT, () => console.log(`Node server listening on port ${process.env.REACT_APP_SERVER_PORT}!`));
 

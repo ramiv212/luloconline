@@ -44,7 +44,7 @@ function ProductPage() {
     .then((response) => response.json())
     .then((data)=> {
       // add up the ratings from all reviews and divide by number of reviews
-      const productReviews = data[id]
+      const productReviews = data
       
       let averageRating = Math.floor(( productReviews.reduce((a,b) => a + parseInt(b.rating),0) ) / productReviews.length)
 

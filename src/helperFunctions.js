@@ -52,7 +52,7 @@ export function decrementFromCart(id,shoppingCartState,setShoppingCartState) {
         id: id,
         qty: 1,
     }
-
+    
     // check if item already exists in shopping cart array
     let item = shoppingCartState.find(product => product.id === id)
 
