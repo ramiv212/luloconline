@@ -48,7 +48,9 @@ function Addreview({ productID }) {
         <Form.Label>Name <span className='required-text'>*Required</span></Form.Label>
         <Form.Control type="text"/>
       </Form.Group>
-
+      
+      <Form.Group className="mb-3 w-100" controlId="exampleForm.ControlTextarea1">
+      <Form.Label>Rating <span className='required-text'>*Required</span></Form.Label>
       <Form.Select 
         aria-label="Default select example" 
         onChange={(e) => {
@@ -61,6 +63,7 @@ function Addreview({ productID }) {
         <option value={2}>2</option>
         <option value={1}>1</option>
       </Form.Select>
+      </Form.Group>
 
       <Form.Group className="mb-3 w-100" controlId="exampleForm.ControlTextarea1" onChange={(e) => {setReviewState(e.target.value)} }>
         <Form.Label>Review <span className='required-text'>*Required</span></Form.Label>
