@@ -200,21 +200,21 @@ function ProductPage() {
 
               <div style={{paddingTop:'20px',paddingBottom:'20px', width:'80%'}}>
                 {product && <PrismicRichText field={product.data.description} />}
-              </div>
-              <span style={{fontWeight:'700',marginRight:'auto'}}>Reviews</span>
-            
-              {/* If there are no reviews inside of the set, display a message. */}
-              {thisProductReviews.length !== 0 ?
-                <>{thisProductReviews && Array.from(thisProductReviews).map((review,index) => {
-                // console.log(Array.from(thisProductReviews))
-                {
-                return <Review style={{width:'100%'}}
-                  review={review}
-                  key={index}
-                   />
-                }})
-              }</> : <span className="text-secondary">There are no reviews for this item yet.</span>}
 
+                <span style={{fontWeight:'700',marginRight:'auto'}}>Reviews</span>
+            
+                  {/* If there are no reviews inside of the set, display a message. */}
+                  {thisProductReviews.length !== 0 ?
+                    <>{thisProductReviews && Array.from(thisProductReviews).map((review,index) => {
+                    // console.log(Array.from(thisProductReviews))
+                    {
+                    return <Review style={{width:'100%'}}
+                      review={review}
+                      key={index}
+                      />
+                    }})
+              }</> : <span className="text-secondary">There are no reviews for this item yet.</span>}
+              </div>
             </div>
       </Col>
     </Row>

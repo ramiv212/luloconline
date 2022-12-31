@@ -79,7 +79,7 @@ const corsOptions = {
 
 const { Sequelize,DataTypes } = require('sequelize');
 
-const sequelize = new Sequelize(process.env.MYSQL_URL) // Example for postgres
+const sequelize = new Sequelize(process.env.MYSQL_URL)
 
 try {
     await sequelize.authenticate();
