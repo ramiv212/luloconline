@@ -201,7 +201,7 @@ function ProductPage() {
               <div style={{paddingTop:'20px',paddingBottom:'20px', width:'80%'}}>
                 {product && <PrismicRichText field={product.data.description} />}
 
-                <span style={{fontWeight:'700',marginRight:'auto'}}>Reviews</span>
+                <p style={{fontWeight:'700',marginRight:'auto'}}>Reviews</p>
             
                   {/* If there are no reviews inside of the set, display a message. */}
                   {thisProductReviews.length !== 0 ?
