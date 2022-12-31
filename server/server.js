@@ -237,17 +237,6 @@ const init = async () => {
     });
       
 
-    function writeToReviewFile(object) {
-        const jsonString = JSON.stringify(object)
-        fs.writeFile('./reviews.json',jsonString,err => {
-            if (err) {
-                console.log(err)
-            } else {
-                console.log('Successfuly updated reviews')
-            }
-        })
-    }
-
     app.post("/api/reviews/", cors(corsOptions), (req,res) => {
         
         try {
