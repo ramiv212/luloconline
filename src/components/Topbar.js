@@ -18,8 +18,8 @@ function Topbar() {
         </div>
         
         {/* IG Logo */}
-        <div style={{display:'flex',gap:'15px',flexDirection:'rows',width:'30%',alignItems:'center', justifyContent:'right',marginRight:'30px'}}>
-          <img src={instagram} style={{height:'23px', float:"right"}}/>
+        {/* <div style={{display:'flex',gap:'15px',flexDirection:'rows',width:'30%',alignItems:'center', justifyContent:'right',marginRight:'30px'}}>
+          <img src={instagram} style={{height:'23px', float:"right"}}/> */}
 
           {/* Cart Icon */}
           <CartIcon shoppingCartState={shoppingCartState} appOverlayState={appOverlayState} setAppOverlayState={setAppOverlayState} navBar={false} />
