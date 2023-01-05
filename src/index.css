@@ -48,6 +48,10 @@ code {
   margin:'20px';
 }
 
+.card {
+  border: none !important;
+}
+
 .card-img-top {
   border-radius: 0 !important;
   cursor: pointer;
