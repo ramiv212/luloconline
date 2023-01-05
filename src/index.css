@@ -463,6 +463,18 @@ code {
   top: 0;
 }
 
+@media (max-width: 992px) {
+  #write-review-desktop {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  #write-review-mobile {
+    display: none;
+  }
+}
+
 @media (max-width: 767.98px) { 
 
   #sidebar-parent {
@@ -521,10 +533,6 @@ code {
     opacity: 1 !important;
   }
 
-  #write-review-desktop {
-    display: none;
-  }
-
   .homepage-category-squares {
     padding: 15px;
     width: 75% !important;
@@ -576,10 +584,6 @@ code {
 
   .learn-page-col {
     height: 60vh;
-  }
-
-  #write-review-mobile {
-    display: none;
   }
 }
 
