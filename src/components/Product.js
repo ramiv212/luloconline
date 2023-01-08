@@ -53,7 +53,7 @@ function Product( {data,id,width} ) {
         disabled={data.outofstock}>
             {data.outofstock ? <>Out Of Stock</> : <>{cartQtyState ? <>Added To Cart (&nbsp;{cartQtyState}&nbsp;)</> : <>Add To Cart</>}</>}
         </Button>
-        <Card.Img variant="top" src={data.image.url} className="card-image" onClick={productPageRoute} alt={data.name[0].text} />
+        <Card.Img variant="top" src={data.image.url} style={{height: `${width}px`}} className="card-image" onClick={productPageRoute} alt={data.name[0].text} />
         
         {data.isnew ? <div className='new-box'>New</div> : ""}
         {data['sale-price'] ? <div className='sale-box'>Sale!</div> : ""}
